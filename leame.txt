@@ -1,0 +1,3 @@
+El fichero de configuracion es:
+libs/constants.php
+En ese fichero puede configurar la conexion con el servidor y asignar los datos de la base de datos.
