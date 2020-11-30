@@ -25,10 +25,12 @@
                         <header id="header">
                             <h1><a href="<?php echo getHomeURL(); ?>" id="logo"><?php echo SITE_NAME; ?></a></h1>
                             <nav id="nav">
+                                <a href="index.php" <?php echo ($currentPage == "index") ? ' class="current-page-item"' : '' ?> >inicio</a>
                                 <a href="about-us.php" <?php echo ($currentPage == "about-us") ? ' class="current-page-item"' : '' ?> >Nosotros</a>
-                                <a href="category.php" <?php echo ($currentPage == "category") ? ' class="current-page-item"' : '' ?>>Categoria</a>
-                                <a href="contact-us.php" <?php echo ($currentPage == "contact-us") ? ' class="current-page-item"' : '' ?>>Contacto</a>
-                                <a href="manage-site" target="_blank">Administracion</a>
+                                <a href="catalog.php" <?php echo ($currentPage == "catalog") ? ' class="current-page-item"' : '' ?>>Catálogo</a>
+                                <a href="signin.php" <?php echo ($currentPage == "signin") ? ' class="current-page-item"' : '' ?> >Registrarse</a>
+                                <a href="login.php" <?php echo ($currentPage == "login") ? ' class="current-page-item"' : '' ?>>Iniciar sesión</a>
+                                <a href="manage-site" target="_blank">Adm-Quitaralfinal</a>
                             </nav>
                         </header>
 

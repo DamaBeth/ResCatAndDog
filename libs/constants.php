@@ -15,7 +15,7 @@ define('DB_HOST_USERNAME', 'root');
 define('DB_HOST_PASSWORD', '');
 define('DB_DATABASE', 'php_web');
 
-define('SITE_NAME', 'Mi Página Web');
+define('SITE_NAME', 'ResCatAnDog');
 
 // define database tables
 define('TABLE_PAGES', DB_PREFIX.'pages');
