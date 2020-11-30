@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html>
     <head>
-        <title><?php echo stripslashes($pageDetails["page_title"]); ?> - <?php echo SITE_NAME; ?> - www.baulphp.com</title>
+        <title><?php echo stripslashes($pageDetails["page_title"]); ?> - <?php echo SITE_NAME; ?> - www.rescatanddog.com</title>
         <link rel="icon" href="favicon.ico" type="image/x-icon" />
         <meta http-equiv="content-type" content="text/html; charset=utf-8" />
         <meta name="description" content="<?php echo stripslashes($pageDetails["meta_desc"]); ?>" />
@@ -25,7 +25,7 @@
                         <header id="header">
                             <h1><a href="<?php echo getHomeURL(); ?>" id="logo"><?php echo SITE_NAME; ?></a></h1>
                             <nav id="nav">
-                                <a href="index.php" <?php echo ($currentPage == "index") ? ' class="current-page-item"' : '' ?> >inicio</a>
+                                <a href="index.php" <?php echo ($currentPage == "index") ? ' class="current-page-item"' : '' ?> >Inicio</a>
                                 <a href="about-us.php" <?php echo ($currentPage == "about-us") ? ' class="current-page-item"' : '' ?> >Nosotros</a>
                                 <a href="catalog.php" <?php echo ($currentPage == "catalog") ? ' class="current-page-item"' : '' ?>>Catálogo</a>
                                 <a href="signin.php" <?php echo ($currentPage == "signin") ? ' class="current-page-item"' : '' ?> >Registrarse</a>

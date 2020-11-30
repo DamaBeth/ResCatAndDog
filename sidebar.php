@@ -60,7 +60,7 @@ if ($_GET["id"] <> "") {
     </section>-->
     
     <section>
-        <h2>Follow me on Twitter</h2>
+        <h2>Follow us on Twitter</h2>
         <div>
             <div class="row">
                 <div class="12u">

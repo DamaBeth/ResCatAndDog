@@ -101,17 +101,17 @@ function validateForm() {
       <?php } ?>
       <form action="login.php" method="post" name="f" onsubmit="return validateForm();">
         <div class="rows">
-			<div class="label"><span style="color:#F00;">*</span>Name: </div>
+			<div class="label"><span style="color:#F00;">*</span>Nombre de usuario: </div>
 			<div class="input-row" ><input name="your_name" id="your_name" type="text" class="textbox" autocomplete="off"></div>
 		</div>
         
         <div class="rows">
-			<div class="label"><span style="color:#F00;">*</span>Email: </div>
+			<div class="label"><span style="color:#F00;">*</span>Correo: </div>
 			<div class="input-row" ><input name="your_email" id="your_email" type="text" class="textbox" autocomplete="off"></div>
 		</div>
         
         <div class="rows">
-			<div class="label"><span style="color:#F00;">*</span>Subject: </div>
+			<div class="label"><span style="color:#F00;">*</span>Contraseña: </div>
 			<div class="input-row" ><input name="your_subject" id="your_subject" type="text" class="textbox" autocomplete="off"></div>
 		</div>
         
@@ -123,7 +123,7 @@ function validateForm() {
         
          <div class="rows">
          <div class="label"></div>
-         <input type="submit" value="send" name="sbtn" class="submit_button" />
+         <input type="submit" value="Entrar" name="sbtn" class="submit_button" />
          </div>
 
         
