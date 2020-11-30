@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html>
     <head>
-        <title><?php echo stripslashes($pageDetails["page_title"]); ?> - <?php echo SITE_NAME; ?> - www.baulphp.com</title>
+        <title><?php echo stripslashes($pageDetails["page_title"]); ?> - <?php echo SITE_NAME; ?> - RescatAndDog</title>
         <link rel="icon" href="favicon.ico" type="image/x-icon" />
         <meta http-equiv="content-type" content="text/html; charset=utf-8" />
         <meta name="description" content="<?php echo stripslashes($pageDetails["meta_desc"]); ?>" />

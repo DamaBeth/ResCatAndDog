@@ -60,7 +60,7 @@ if ($_GET["id"] <> "") {
     </section>-->
     
     <section>
-        <h2>Follow me on Twitter</h2>
+        <h2>Apoya a la fundación</h2>
         <div>
             <div class="row">
                 <div class="12u">
@@ -86,7 +86,7 @@ if ($_GET["id"] <> "") {
     </section>
 
     <section>
-        <h2>Like us on facebook</h2>
+        <h2>Llévate una huellita a casa</h2>
         <div>
             <div class="row">
                 <div class="12u">
@@ -99,7 +99,7 @@ if ($_GET["id"] <> "") {
     </section>
 
     <section>
-        <h2>Follow on Google Plus</h2>
+        <h2>No te vas a arrepentir</h2>
         <div>
             <div class="row">
                 <div class="12u">

@@ -136,7 +136,7 @@
 /* Banner */
 
 	#banner-wrapper {
-		background: #c8d2bc url(images/bg1.png);
+		background: #f9c2fd url(images/bg1.png);
 	}
 
 	#banner {
@@ -198,7 +198,7 @@
 
 	#copyright {
 		text-align: center;
-		color: #A6A88F;
+		color: #000000;
 		padding: 1em 0 0 0;
 		margin: 1% 0 0 0;
 	}

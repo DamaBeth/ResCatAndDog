@@ -15,9 +15,10 @@
 	body {
 		font-size: 13.5pt;
 		font-family: sans-serif;
-		background-color: #e3e9dc;
+		/*Fondo del footer o general*/
+		background-color: #f5d6f7;
 		font-family: 'Ubuntu Condensed', sans-serif;
-		color: #878e83;
+		color: #262f30;
 		letter-spacing: -1px;
 	}
 
@@ -125,7 +126,7 @@
 	}
 
 		ul.link-list li {
-			border-top: solid 1px #ced0b7;
+			border-top: solid 1px #63bcdf;
 			padding: 0.75em 0 0 0;
 			margin: 0.75em 0 0 0;
 		}
