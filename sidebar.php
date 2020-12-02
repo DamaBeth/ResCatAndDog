@@ -58,7 +58,10 @@ if ($_GET["id"] <> "") {
             </div>
         </div>
     </section>-->
-    
+    <section>
+        <div id="bannerSB">
+        </div>    
+    </section>
     <section>
         <h2>Apoya a la fundación</h2>
         <!-- <div>
@@ -123,4 +126,5 @@ if ($_GET["id"] <> "") {
             </div>
         </div>
     </section>
+    
 </div>
