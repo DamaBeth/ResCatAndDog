@@ -43,12 +43,36 @@ include("header.php");
 
                             foreach ($categorias as $categoria) 
                             {
-                                if($categoria['id'] == '1')
-                                    echo '<div class="tab-pane active" id="' . $categoria['id'] .'">';
+                                if($categoria['id'] == '1'){
+                                    echo '<div class="tab-pane active" id="' . $categoria['id'] .'">';   
+                                }
                                 else
                                     echo '<div class="tab-pane" id="' . $categoria['id'] .'">';
-                                
                                 echo '<div class="row">';
+
+                                if($categoria['id'] == '1'){
+                                    $statement = $DB->prepare('SELECT * FROM mascota');
+                                    $statement->execute(array($categoria['id']));
+                                    while ($mascota = $statement->fetch()) 
+                                    {
+                                        echo '<div class="col-sm-6 col-md-4">
+                                                <div class="thumbnail">
+                                                    <img src="ImagenesMascotas/' . $mascota['foto'] . '" alt="...">
+                                                    <div class="price">' . $mascota['nombre']. ' </div>
+                                                    <div class="caption">
+                                                        <h4>' . $mascota['tipo'] . '</h4>
+                                                        <p>' . $mascota['comentarios'] . '</p>
+                                                        <div class="left-contentCatag">
+                                                            <a href="#" class="btn btn-adoptar" role="button"> Adoptar</a>
+                                                        </div>
+                                                        <div class="left-contentCatag">
+                                                            <a href="ver-mascota.php?id='.$mascota['idMascota'].'" class="btn btn-info" role="button"><span class="glyphicon glyphicon-eye-open"></span> Ver</a>
+                                                        </div>   
+                                                    </div>
+                                                </div>
+                                            </div>';
+                                    }
+                                }
                                 
                                 $statement = $DB->prepare('SELECT * FROM mascota WHERE mascota.categoria = ?');
                                 $statement->execute(array($categoria['id']));
@@ -61,7 +85,12 @@ include("header.php");
                                                 <div class="caption">
                                                     <h4>' . $mascota['tipo'] . '</h4>
                                                     <p>' . $mascota['comentarios'] . '</p>
-                                                    <a href="#" class="btn btn-order" role="button"> Adoptar</a>
+                                                    <div class="left-contentCatag">
+                                                            <a href="#" class="btn btn-adoptar" role="button"> Adoptar</a>
+                                                        </div>
+                                                        <div class="left-contentCatag">
+                                                            <a href="#" class="btn btn-info" role="button"> Ver</a>
+                                                    </div> 
                                                 </div>
                                             </div>
                                         </div>';
