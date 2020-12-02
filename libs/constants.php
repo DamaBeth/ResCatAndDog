@@ -20,4 +20,10 @@ define('SITE_NAME', 'ResCatAnDog');
 // define database tables
 define('TABLE_PAGES', DB_PREFIX.'pages');
 define('TABLE_TAGLINE', DB_PREFIX.'tagline');
+define('TABLE_ADOPTANTE', 'adoptante');
+define('TABLE_CUIDADOR', 'cuidador');
+define('TABLE_DIRECCION', 'direccion');
+define('TABLE_MASCOTA', 'mascota');
+define('TABLE_SOLICITUD', 'solicitud');
+define('TABLE_USUARIO', 'usuario');
 ?>

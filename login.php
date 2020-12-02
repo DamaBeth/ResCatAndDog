@@ -1,24 +1,21 @@
 <?php
-
-
 require("libs/config.php");
 $pageDetails = getPageDetailsByName($currentPage);
 
+$msg = '';
 if (isset($_POST["sbtn"])) {
-	$name = db_prepare_input($_POST["your_name"]);
-	$email = db_prepare_input($_POST["your_email"]);
-	$subject = db_prepare_input($_POST["your_subject"]);
-	$message = db_prepare_input($_POST["your_message"]);
-	$message = wordwrap($message, 70, "\r\n");
+	$correo = db_prepare_input($_POST["correo"]);
+	$password = db_prepare_input($_POST["password"]);
 	
+	if ($correo <> "" && $password <> "") {
+
+	}else{
+		$msg = errorMessage("Todos los campos son obligatorios");
+	}
+
 	$to = "lluvia_naomy@hotmail.com";
 	
-	$headers = "MIME-Version: 1.0" . "\r\n";
-	$headers .= "Content-type: text/plain; charset=iso-8859-1" . "\r\n";
-	$headers .= "From: $name <$email>" . "\r\n";
-	$headers .= "X-Mailer: PHP/".phpversion();
-	
-	$res = @mail($to, $subject, $message, $headers);	
+	$res = @mail($to, $subject);	
 	if ($res) {
 		simple_redirect("login.php?msg=success");
 	} else {
@@ -47,43 +44,24 @@ function IsEmail(email) {
 }
 
 function validateForm() {
-	var name = $.trim($("#your_name").val());
-	var email = $.trim($("#your_email").val());
-	var subject = $.trim($("#your_subject").val());
-	var message = $.trim($("#your_message").val());
+	var correo = $.trim($("#correo").val());
+	var password = $.trim($("#password").val());
 	
-	if (name == "" ) {
-        alert("Enter your name");
-		$("#your_name").focus();
-        return false;
-    }  else if (name.length < 3 ) {
-		alert("Enter atleast 2 letter.");
-        $("#your_name").focus();
-		 return false;
-    }
-
-	if (email == "" ) {
+	if (correo == "" ) {
         alert("Enter your email");
-		$("#your_email").focus();
+		$("#correo").focus();
         return false;
     } else if (!IsEmail(email)) {
         alert("Enter valid email");
-		$("#your_email").focus();
+		$("#correo").focus();
         return false;
     } 
-
 	
-	if (subject == "" ) {
+	if (password == "" ) {
         alert("Enter your subject");
-		$("#your_subject").focus();
+		$("#password").focus();
         return false;
     } 
-	
-	if (message == "" ) {
-        alert("Enter your message");
-		$("#your_message").focus();
-        return false;
-    }  
 	
 	return true;
 }
@@ -93,6 +71,7 @@ function validateForm() {
     <section class="left-content">
      <h2><?php echo stripslashes($pageDetails["page_title"]); ?></h2>
             <?php echo stripslashes($pageDetails["page_desc"]); ?>
+
       <div style="height:30px;clear:both"></div>
       <?php if ($_GET["msg"] == "success") { ?>
       <div class="success">Thank you for contacting us. We will get back to you withinh 24 hours.</div>
@@ -100,25 +79,15 @@ function validateForm() {
       <div class="error">There was problem sending mail. please try again or try later.</div>
       <?php } ?>
       <form action="login.php" method="post" name="f" onsubmit="return validateForm();">
-        <div class="rows">
-			<div class="label"><span style="color:#F00;">*</span>Nombre de usuario: </div>
-			<div class="input-row" ><input name="your_name" id="your_name" type="text" class="textbox" autocomplete="off"></div>
-		</div>
         
         <div class="rows">
 			<div class="label"><span style="color:#F00;">*</span>Correo: </div>
-			<div class="input-row" ><input name="your_email" id="your_email" type="text" class="textbox" autocomplete="off"></div>
+			<div class="input-row" ><input name="correo" id="correo" type="text" class="textbox" autocomplete="off"></div>
 		</div>
         
         <div class="rows">
 			<div class="label"><span style="color:#F00;">*</span>Contraseña: </div>
-			<div class="input-row" ><input name="your_subject" id="your_subject" type="text" class="textbox" autocomplete="off"></div>
-		</div>
-        
-         <div class="rows">
-			<div class="label"><span style="color:#F00;">*</span>Message: </div>
-			<div class="input-textarea-row" >
-            <textarea class="textarea" name="your_message" id="your_message"></textarea></div>
+			<div class="input-row" ><input name="password" id="password" type="text" class="textbox" autocomplete="off"></div>
 		</div>
         
          <div class="rows">
