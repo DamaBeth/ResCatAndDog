@@ -51,7 +51,7 @@ include("header.php");
                                 echo '<div class="row">';
 
                                 if($categoria['id'] == '1'){
-                                    $statement = $DB->prepare('SELECT * FROM mascota');
+                                    $statement = $DB->prepare("SELECT * FROM mascota WHERE mascota.estado = 'activo'");
                                     $statement->execute(array($categoria['id']));
                                     while ($mascota = $statement->fetch()) 
                                     {
@@ -66,7 +66,7 @@ include("header.php");
                                                             <a href="#" class="btn btn-adoptar" role="button"> Adoptar</a>
                                                         </div>
                                                         <div class="left-contentCatag">
-                                                            <a href="ver-mascota.php?id='.$mascota['idMascota'].'" class="btn btn-info" role="button"><span class="glyphicon glyphicon-eye-open"></span> Ver</a>
+                                                            <a href="ver-mascota.php?id='.$mascota['idMascota'].'" class="btn btn-info" role="button"> Ver</a>
                                                         </div>   
                                                     </div>
                                                 </div>
@@ -74,7 +74,7 @@ include("header.php");
                                     }
                                 }
                                 
-                                $statement = $DB->prepare('SELECT * FROM mascota WHERE mascota.categoria = ?');
+                                $statement = $DB->prepare("SELECT * FROM mascota WHERE mascota.categoria = ? AND mascota.estado = 'activo'");
                                 $statement->execute(array($categoria['id']));
                                 while ($mascota = $statement->fetch()) 
                                 {
@@ -89,7 +89,7 @@ include("header.php");
                                                             <a href="#" class="btn btn-adoptar" role="button"> Adoptar</a>
                                                         </div>
                                                         <div class="left-contentCatag">
-                                                            <a href="#" class="btn btn-info" role="button"> Ver</a>
+                                                            <a href="ver-mascota.php?id='.$mascota['idMascota'].'" class="btn btn-info" role="button"> Ver</a>
                                                     </div> 
                                                 </div>
                                             </div>
