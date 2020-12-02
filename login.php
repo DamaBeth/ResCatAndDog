@@ -21,7 +21,8 @@ if (isset($_POST["sbtn"])) {
 			$stmt->execute();
 
 			if ($stmt->rowCount() > 0) {
-				simple_redirect("login.php?msg=success");
+				//simple_redirect("login.php?msg=success");
+				simple_redirect("index.php");
 			} else if ($stmt->rowCount() == 0) {
 				simple_redirect("login.php?msg=error");
 			} else {

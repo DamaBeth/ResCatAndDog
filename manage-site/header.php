@@ -16,6 +16,6 @@
         <a href="home.php" class="menus">Portada</a>
         <a href="tagline.php" class="menus">Lema del sitio</a>
         <a href="manage_pages.php" class="menus">Adminsitrar páginas</a>
-        
+        <a href="manage_users.php" class="menus">Adminsitrar usuarios</a>
         </nav>
         <article>
