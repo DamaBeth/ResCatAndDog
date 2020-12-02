@@ -10,7 +10,7 @@ if(!empty($_GET['id']))
     {
         $idTipoUser = checkInput($_GET['idTipoUser']);
     }
-    $statement = $DB->prepare("SELECT mascota.idMascota, mascota.nombre, mascota.comentarios, mascota.edad, mascota.foto, mascota.tipo, mascota.sexo, categorias.name AS categoria, usuario.nombre AS nameUser, usuario.telefono AS telUser FROM mascota LEFT JOIN categorias ON mascota.categoria = categorias.id JOIN cuidador ON mascota.cuidador = cuidador.idCuidador JOIN usuario ON cuidador.idUsuario = usuario.idUsuario WHERE mascota.idMascota = ?");
+    $statement = $DB->prepare("SELECT mascota.idMascota, mascota.nombre, mascota.comentarios, mascota.edad, mascota.foto, mascota.tipo, mascota.sexo, categorias.name AS categoria, usuario.nombre AS nameUser, usuario.telefono AS telUser, usuario.correo AS emailUser FROM mascota LEFT JOIN categorias ON mascota.categoria = categorias.id JOIN cuidador ON mascota.cuidador = cuidador.idCuidador JOIN usuario ON cuidador.idUsuario = usuario.idUsuario WHERE mascota.idMascota = ?");
     $statement->execute(array($id));
     $mascota = $statement->fetch();
 
@@ -68,7 +68,10 @@ include("header.php");
                         <label>Nombre del cuidador:</label><?php echo '  '.$mascota['nameUser'];?>
                       </div>
                       <div class="form-group">
-                        <label>Teléfono del usuario:</label><?php echo '  '.$mascota['telUser'];?>
+                        <label>Teléfono del cuidador:</label><?php echo '  '.$mascota['telUser'];?>
+                      </div>
+                      <div class="form-group">
+                        <label>Correo eletrónico del cuidador:</label><?php echo '  '.$mascota['emailUser'];?>
                       </div>
                     </form>
                     <br>
