@@ -2,7 +2,8 @@
 
 require("libs/config.php");
 $pageDetails = getPageDetailsByName($currentPage);
-$id = 1; /*id del cuidador que está logueado*/
+$idUserCuidador = "1"; /*id del cuidador que está logueado*/
+$idTipoUser = "2" /*id del tipo de usuario 1:admin, 2:cuidador, 3:adoptante, 4:visitante*/
 ?>
 <!DOCTYPE html>
 <html>
@@ -36,8 +37,8 @@ $id = 1; /*id del cuidador que está logueado*/
                   </thead>
                   <tbody>
                       <?php
-                        $statement = $DB->query("SELECT mascota.idMascota, mascota.nombre, mascota.comentarios, mascota.tipo, categorias.name AS categoria, usuario.nombre AS nameUser, usuario.telefono AS telUser FROM mascota LEFT JOIN categorias ON mascota.categoria = categorias.id JOIN cuidador ON mascota.cuidador = cuidador.idCuidador JOIN usuario ON cuidador.idUsuario = usuario.idUsuario WHERE mascota.estado = 'activo' AND mascota.cuidador = '2' ORDER BY mascota.idMascota DESC");
-                        /*$statement->execute(array($id));*/
+                        $statement = $DB->prepare("SELECT mascota.idMascota, mascota.nombre, mascota.comentarios, mascota.tipo, categorias.name AS categoria, usuario.nombre AS nameUser, usuario.telefono AS telUser FROM mascota LEFT JOIN categorias ON mascota.categoria = categorias.id JOIN cuidador ON mascota.cuidador = cuidador.idCuidador JOIN usuario ON cuidador.idUsuario = usuario.idUsuario WHERE mascota.estado = 'activo' AND mascota.cuidador = ? ORDER BY mascota.idMascota DESC");
+                        $statement->execute(array($idUserCuidador));
                         while($mascota = $statement->fetch()) 
                         {
                             echo '<tr>';
@@ -46,11 +47,11 @@ $id = 1; /*id del cuidador que está logueado*/
                             echo '<td>'. $mascota['tipo'] . '</td>';
                             echo '<td>'. $mascota['categoria'] . '</td>';
                             echo '<td width=300>';
-                            echo '<a class="btn btn-default" href="ver-mascota.php?id='.$mascota['idMascota'].'"><span class="glyphicon glyphicon-eye-open"></span> Ver</a>';
+                            echo '<a class="btn btn-default" href="ver-mascota.php?id='.$mascota['idMascota'].'&idTipoUser='.$idTipoUser.'"><span class="glyphicon glyphicon-eye-open"></span> Ver</a>';
                             echo ' ';
-                            echo '<a class="btn btn-primary" href="modificar-mascota.php?id='.$mascota['idMascota'].'"><span class="glyphicon glyphicon-pencil"></span> Modificar</a>';
+                            echo '<a class="btn btn-primary" href="modificar-mascota.php?id='.$mascota['idMascota'].'&idTipoUser='.$idTipoUser.'"><span class="glyphicon glyphicon-pencil"></span> Modificar</a>';
                             echo ' ';
-                            echo '<a class="btn btn-danger" href="eliminar-mascota.php?id='.$mascota['idMascota'].'"><span class="glyphicon glyphicon-remove"></span> Eliminar</a>';
+                            echo '<a class="btn btn-danger" href="eliminar-mascota.php?id='.$mascota['idMascota'].'&idTipoUser='.$idTipoUser.'"><span class="glyphicon glyphicon-remove"></span> Eliminar</a>';
                             echo '</td>';
                             echo '</tr>';
                         }

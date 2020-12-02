@@ -7,6 +7,11 @@ if(!empty($_GET['id']))
         $id = checkInput($_GET['id']);
     }
 
+    if(!empty($_GET['idTipoUser'])) 
+    {
+        $idTipoUser = checkInput($_GET['idTipoUser']);
+    }
+
     $nombreError = $descripcionError = $edadError = $fotoError = $nombre = $descripcion = $edad = $foto = "";
 
     if(!empty($_POST)) 
@@ -79,7 +84,7 @@ if(!empty($_GET['id']))
                 $statement = $DB->prepare("UPDATE mascota  set nombre = ?, comentarios = ?, edad = ? WHERE idMascota = ?");
                 $statement->execute(array($nombre,$descripcion,$edad,$id));
             }
-            header("Location: admin-catalogo.php");
+            header("Location: admin-catalogo.php"); 
         }
         else if($isImageUpdated && !$isUploadSuccess)
         {
@@ -153,9 +158,17 @@ if(!empty($_GET['id']))
                             <span class="help-inline"><?php echo $fotoError;?></span>
                         </div>
                         <br>
-                        <div class="form-actions">
-                            <button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-pencil"></span> Modificar</button>
-                            <a class="btn btn-primary" href="admin-catalogo.php"><span class="glyphicon glyphicon-arrow-left"></span> Regresar</a>
+                        <div class="col-sm-6">
+                            <a><button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-pencil"></span> Modificar</button></a>
+                        </div>
+                        <div class="col-sm-6">
+                            <?php
+                                if($idTipoUser == '1'){
+                                    echo '<a class="btn btn-primary" href="admin-catalogo.php"><span class="glyphicon glyphicon-arrow-left"></span> Regresar</a>';
+                                }elseif($idTipoUser == '2'){
+                                    echo '<a class="btn btn-primary" href="cuidador-catalogo.php"><span class="glyphicon glyphicon-arrow-left"></span> Regresar</a>';
+                                }
+                            ?>
                        </div>
                     </form>
                 </div>

@@ -1,11 +1,16 @@
 .cuerpo
 {
-    /*background: url(../ImagenesMascotas/bg.png);*/
     background-color: #DDBBDD;
 }
 .site
 {
     font-family: 'Holtwood One SC', sans-serif;
+}
+.site2
+{
+    font-family: 'Times New Roman', Times, serif;
+    color: #000000;
+    font-size: 18px;
 }
 .text-logo
 {
@@ -97,8 +102,8 @@
     background-color: #7FBEEB;
     text-decoration: none;
     text-shadow: 2px 2px #333;
-    padding-right: 35px;
-    padding-left: 35px;
+    padding-right: 30px;
+    padding-left: 30px;
 }
 .btn-adoptar:hover, .btn-adoptar:focus
 {
@@ -116,8 +121,8 @@
     background-color: #7FBEEB;
     text-decoration: none;
     text-shadow: 2px 2px #333;
-    padding-right: 65px;
-    padding-left: 65px;
+    padding-right: 60px;
+    padding-left: 60px;
 }
 .btn-info:hover, .btn-info:focus
 {
@@ -125,7 +130,8 @@
     background-color: #56CBF9;
 }
 
-/*  ADMIN */
+
+/*  ADMIN y CUIDADOR*/
 
 .admin
 {
@@ -141,7 +147,7 @@
 .left-contentCatag
 {
     display: inline-block;
-    margin: 1 10px;
+    margin: 0 5px;
 
 }
 .detalles

@@ -2,6 +2,7 @@
 
 require("libs/config.php");
 $pageDetails = getPageDetailsByName($currentPage);
+$idTipoUser = '1'; /*id del tipo de usuario 1:admin, 2:cuidador, 3:adoptante, 4:visitante*/
 ?>
 <!DOCTYPE html>
 <html>
@@ -47,11 +48,11 @@ $pageDetails = getPageDetailsByName($currentPage);
                             echo '<td>'. $mascota['categoria'] . '</td>';
                             echo '<td>'. $mascota['nameUser'] . '</td>';
                             echo '<td width=300>';
-                            echo '<a class="btn btn-default" href="ver-mascota.php?id='.$mascota['idMascota'].'"><span class="glyphicon glyphicon-eye-open"></span> Ver</a>';
+                            echo '<a class="btn btn-default" href="ver-mascota.php?id='.$mascota['idMascota'].'&idTipoUser='.$idTipoUser.'"><span class="glyphicon glyphicon-eye-open"></span> Ver</a>';
                             echo ' ';
-                            echo '<a class="btn btn-primary" href="modificar-mascota.php?id='.$mascota['idMascota'].'"><span class="glyphicon glyphicon-pencil"></span> Modificar</a>';
+                            echo '<a class="btn btn-primary" href="modificar-mascota.php?id='.$mascota['idMascota'].'&idTipoUser='.$idTipoUser.'"><span class="glyphicon glyphicon-pencil"></span> Modificar</a>';
                             echo ' ';
-                            echo '<a class="btn btn-danger" href="eliminar-mascota.php?id='.$mascota['idMascota'].'"><span class="glyphicon glyphicon-remove"></span> Eliminar</a>';
+                            echo '<a class="btn btn-danger" href="eliminar-mascota.php?id='.$mascota['idMascota'].'&idTipoUser='.$idTipoUser.'"><span class="glyphicon glyphicon-remove"></span> Eliminar</a>';
                             echo '</td>';
                             echo '</tr>';
                         }
