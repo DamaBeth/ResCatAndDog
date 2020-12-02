@@ -22,7 +22,7 @@ $id = 1; /*id del cuidador que está logueado*/
         <div class="container admin">
             <div class="row">
                 <div class="detalles">
-                    <label>Lista de mascotas </label>  <a href="agregar-mascota.php" class="btn btn-success btn-lg"><span class="glyphicon glyphicon-plus"></span>Agregar una mascota</a></h1>
+                    <label>Lista de mascotas </label>  <a href="agregar-mascota-cuidador.php" class="btn btn-success btn-lg"><span class="glyphicon glyphicon-plus"></span>Agregar una mascota</a></h1>
                 </div>
                 <table class="table table-striped table-bordered">
                   <thead>
