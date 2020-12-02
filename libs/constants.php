@@ -3,8 +3,8 @@
 
 // dont add a trailing / at the end
 define('HTTP_SERVER', 'http://localhost');
-// add slash / at the end Cambiar po 80 si no eres Lluvia (?)
-define('SITE_DIR', ':8080/ResCatAndDog/');
+// add slash / at the end 
+define('SITE_DIR', ':8088/ResCatAndDog/');
 
 // database prefix if you use
 define('DB_PREFIX', 'mp_');
