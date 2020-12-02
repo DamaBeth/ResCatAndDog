@@ -61,7 +61,7 @@ if ($_GET["id"] <> "") {
     
     <section>
         <h2>Apoya a la fundación</h2>
-        <div>
+        <!-- <div>
             <div class="row">
                 <div class="12u">
                     <a class="twitter-follow-button"
@@ -69,7 +69,7 @@ if ($_GET["id"] <> "") {
 		data-show-count="true" data-size="large"  
 		data-lang="en"  >
 		Follow 
-		</a>
+		</a> 
 		<script type="text/javascript">
 		window.twttr = (function (d, s, id) {
 		var t, js, fjs = d.getElementsByTagName(s)[0];
@@ -82,7 +82,7 @@ if ($_GET["id"] <> "") {
 		</script>
                 </div>
             </div>
-        </div>
+        </div>-->
     </section>
 
     <section>
@@ -99,7 +99,7 @@ if ($_GET["id"] <> "") {
     </section>
 
     <section>
-        <h2>No te vas a arrepentir</h2>
+        <h2>¡No te vas a arrepentir!</h2>
         <div>
             <div class="row">
                 <div class="12u">

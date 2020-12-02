@@ -25,11 +25,12 @@
                         <header id="header">
                             <h1><a href="<?php echo getHomeURL(); ?>" id="logo"><?php echo SITE_NAME; ?></a></h1>
                             <nav id="nav">
-                                <a href="index.php" <?php echo ($currentPage == "index") ? ' class="current-page-item"' : '' ?> >inicio</a>
-                                <a href="about-us.php" <?php echo ($currentPage == "about-us") ? ' class="current-page-item"' : '' ?> >Nosotros</a>
+                                <a href="index.php" <?php echo ($currentPage == "index") ? ' class="current-page-item"' : '' ?> >Inicio</a>
                                 <a href="catalog.php" <?php echo ($currentPage == "catalog") ? ' class="current-page-item"' : '' ?>>Catálogo</a>
+                                <a href="about-us.php" <?php echo ($currentPage == "about-us") ? ' class="current-page-item"' : '' ?> >Nosotros</a>
                                 <a href="signin.php" <?php echo ($currentPage == "signin") ? ' class="current-page-item"' : '' ?> >Registrarse</a>
                                 <a href="login.php" <?php echo ($currentPage == "login") ? ' class="current-page-item"' : '' ?>>Iniciar sesión</a>
+                                
                                 <a href="manage-site" target="_blank">Adm-Quitaralfinal</a>
                             </nav>
                         </header>
@@ -40,29 +41,120 @@
         </div>
         <?php
         if ($currentPage == "index") {
-            try {
-                $stmt = $DB->prepare("SELECT * FROM " . TABLE_TAGLINE . " WHERE 1 LIMIT 1");
-                $stmt->bindValue(":pname", $pageAlias);
-                $stmt->execute();
-                $details = $stmt->fetchAll();
-            } catch (Exception $ex) {
-                echo errorMessage($ex->getMessage());
-            }
+            // try {
+            //     $stmt = $DB->prepare("SELECT * FROM " . TABLE_TAGLINE . " WHERE 1 LIMIT 1");
+            //     $stmt->bindValue(":pname", $pageAlias);
+            //     $stmt->execute();
+            //     $details = $stmt->fetchAll();
+            // } catch (Exception $ex) {
+            //     echo errorMessage($ex->getMessage());
+            // }
             ?>
             <div id="banner-wrapper">
                 <div class="container">
                     <div class="row">
                         <div class="12u">
-
                             <div id="banner">
-                                <h2><?php echo stripslashes($details[0]["tagline1"]); ?></h2>
-                                <span><?php echo stripslashes($details[0]["tagline2"]); ?></span>
+                                <!-- <h2><?php echo stripslashes($details[0]["tagline1"]); ?></h2>
+                                <span><?php echo stripslashes($details[0]["tagline2"]); ?> -->
+                                </span>
                             </div>
 
                         </div>
                     </div>
                 </div>
             </div>
-        <?php } ?>
+        <?php } 
+        ?>
+        <?php
+        if ($currentPage == "about-us") {
+            // try {
+            //     $stmt = $DB->prepare("SELECT * FROM " . TABLE_TAGLINE . " WHERE 1 LIMIT 1");
+            //     $stmt->bindValue(":pname", $pageAlias);
+            //     $stmt->execute();
+            //     $details = $stmt->fetchAll();
+            // } catch (Exception $ex) {
+            //     echo errorMessage($ex->getMessage());
+            // }
+            ?>
+            <div id="banner-wrapper">
+                <div class="container">
+                    <div class="row">
+                        <div class="12u">
+                            <div id="bannerAU">
+                                <!-- <h2><?php echo stripslashes($details[0]["tagline1"]); ?></h2>
+                                <span><?php echo stripslashes($details[0]["tagline2"]); ?> -->
+                                </span>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <?php } 
+        ?>
+
+        <?php
+        if ($currentPage == "catalog") {
+            // try {
+            //     $stmt = $DB->prepare("SELECT * FROM " . TABLE_TAGLINE . " WHERE 1 LIMIT 1");
+            //     $stmt->bindValue(":pname", $pageAlias);
+            //     $stmt->execute();
+            //     $details = $stmt->fetchAll();
+            // } catch (Exception $ex) {
+            //     echo errorMessage($ex->getMessage());
+            // }
+            ?>
+            <div id="banner-wrapper">
+                <div class="container">
+                    <div class="row">
+                        <div class="12u">
+                            <div id="bannerCat">
+                                <!-- <h2><?php echo stripslashes($details[0]["tagline1"]); ?></h2>
+                                <span><?php echo stripslashes($details[0]["tagline2"]); ?> -->
+                                </span>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <?php } 
+        ?>
+
+        <?php
+        if ($currentPage == "signin") {
+            ?>
+            <div id="banner-wrapper">
+                <div class="container">
+                    <div class="row">
+                        <div class="12u">
+                            <div id="bannerSU">
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <?php } 
+        ?>
+
+        <?php
+        if ($currentPage == "login") {
+            ?>
+            <div id="banner-wrapper">
+                <div class="container">
+                    <div class="row">
+                        <div class="12u">
+                            <div id="bannerLI">
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <?php } 
+        ?>
+
         <div id="main">
             <div class="container">

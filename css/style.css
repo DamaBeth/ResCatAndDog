@@ -28,14 +28,14 @@
 	}
 
 	h1,h2 {
-		text-transform: lowercase;
+		/*text-transform: lowercase;*/
 	}
 
 	h2 {
 		font-size: 1.6em;
 		letter-spacing: -1px;
 		margin-bottom: 0.5em;
-		text-transform:lowercase;
+		/*text-transform:lowercase;*/
 	}
 
 	h3,h4 {
@@ -148,7 +148,7 @@
 		background-image: -o-linear-gradient(top, #008dad, #007b9d);
 		background-image: linear-gradient(top, #008dad, #007b9d);
 		border-radius: 10px;
-		text-transform: lowercase;
+		/*text-transform: lowercase;*/
 		text-decoration: none;
 		color: #fff;
 		font-size: 1.2em;
