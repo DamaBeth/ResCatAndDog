@@ -2,7 +2,7 @@
 
 
 require("../libs/config.php");
-$pageTitle = "Manage Pages";
+$pageTitle = "Administrar páginas";
 $msg = '';
 if (isset($_GET["del"]) && $_GET["del"] != "") {
     $sql = "DELETE FROM  " . TABLE_PAGES . " WHERE `page_id` = :id";

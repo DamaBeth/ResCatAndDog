@@ -106,9 +106,6 @@ if (isset($_GET["edit"]) && $_GET["edit"] != "") {
     $pageTitle = "Add Page";
 }
 
-
-
-
 include("header.php");
 
 $sql = "SELECT * FROM " . TABLE_PAGES . " WHERE status = 'A' AND parent = -1 ORDER BY page_title ASC";
@@ -190,6 +187,9 @@ try {
                     <?php } else { ?>
                         <label><input type="radio" name="status" value="A" checked  />Active</label> &nbsp; <label><input type="radio" name="status" value="I"  />Inactive</label>
                     <?php } ?>
+
+
+
                 </td>
             </tr>
             <tr>

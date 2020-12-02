@@ -3,19 +3,14 @@
 require("libs/config.php");
 $page = easy_decrypt($_GET["id"]);
 $pageDetails = getPageDetailsByName($currentPage);
-//**************AQUI VA TODO EL CODIGO */
 
 $msg = '';
 if (isset($_POST["sub"])) {
-    //$idUsuario = db_prepare_input($_POST["idUsuario"]);
     $nombre     = db_prepare_input($_POST["nombre"]);
     $correo     = db_prepare_input($_POST["correo"]);
     $password   = db_prepare_input($_POST["password"]);
     $telefono   = db_prepare_input($_POST["telefono"]);
     $username   = db_prepare_input($_POST["username"]);
-
-    //$idDireccion = 1;
-    //$idDireccion = db_prepare_input($_POST["idDireccion"]);
 
     $calle      = db_prepare_input($_POST["calle"]);
     $colonia    = db_prepare_input($_POST["colonia"]);
@@ -26,89 +21,6 @@ if (isset($_POST["sub"])) {
     $status = ($status <> "") ? $status : "I";
 
     if($nombre <> ""  && $correo <> "" && $password <> "" && $username <> ""){
-        //if($idUsuario <> ""){
-/*
-            $sqlUS = "UPDATE " . TABLE_USUARIO . " SET  `nombre` =  :pt, "
-                    . " `password` =  :pdsc, `telefono` = :mkey, "
-                    . " `username` =  :mdesc"
-                    . " WHERE `idUsuario` = :pid";
-                    */
-            /*
-            $sqlDIR = "UPDATE " . TABLA_DIRECCION . " SET  `calle` =  :ca, "
-                    . " `colonia` =  :col, `estado` = :es, "
-                    . " `noExterior` =  :nex, `noInterior` = :noint"
-                    . " WHERE `idDireccion` = :pdir";
-                    */ //Por le momento sólo vamos a probar con la info del usuario
-/*
-                    try {
-                        //Para modificar la información de un usuario
-                        $stmt = $DB->prepare($sqlUS);
-                        $stmt->bindValue(":pt", $nombre);
-                        $stmt->bindValue(":pdsc", $password);
-                        $stmt->bindValue(":mkey", $telefono);
-                        $stmt->bindValue(":mdesc", $username);
-                        $stmt->bindValue(":pid", $idUsuario);
-*/
-                        //Para modificar la información de su dirección
-                        /*
-                        $dirUp = $DB->prepare($sqlDIR);
-                        $dirUp->bindValue(":ca",$calle);
-                        $dirUp->bindValue(":col",$colonia);
-                        $dirUp->bindValue(":es",$estado);
-                        $dirUp->bindValue(":nex",$noExterior);
-                        $dirUp->bindValue(":nint",$noInterior);
-                        $dirUp->bindValue(":pdir",$idDireccion);
-                       */
-                      /*
-                        $stmt->execute();
-                       // $dirUp->execute();
-                        if ($stmt->rowCount() > 0) {
-                            $msg = successMessage("Usuario modificado satisfactoriamente");
-                        }  else if ($stmt->rowCount() == 0) {
-                            $msg = successMessage("No se pudieron realizar los cambios");
-                        } else {
-                            $msg = errorMessage("Failed to update page");
-                        }
-                    } catch (Exception $ex) {
-                        echo errorMessage($ex->getMessage());
-                    }*/
-      //  }else{
-             //solo por ahora la vamos a omitir,falta también poder su insercion
-           // $sqlDIR = "INSERT INTO" . TABLE_DIRECCION . " (`calle`, `colonia`, `estado`, `noExterior`, `noInterior`) VALUES 
-           // (:ca, :col, :es, :nex, :nint)";
-
-           // $sqlLast = "SELECT last_insert_id()";
-/*
-            try{
-                $dirUp = $DB->prepare($sqlDIR);
-                $dirUp->bindValue(":ca",$calle);
-                $dirUp->bindValue(":col",$colonia);
-                $dirUp->bindValue(":es",$estado);
-                $dirUp->bindValue(":nex",$noExterior);
-                $dirUp->bindValue(":nint",$noInterior);
-
-                $dirUp->execute();
-
-                    if ($dirUp->rowCount() > 0) {
-                        $msg = successMessage("Dirección agregada satisfactoriamente");
-                    } else if ($dirUp->rowCount() == 0) {
-                        $msg = successMessage("No changes affected");
-                    } else {
-                        $msg = errorMessage("Error al añadir la dirección");
-                    }
-            }catch (Exception $ex) {
-                echo errorMessage($ex->getMessage());
-            }*/
-/*
-            try{
-                $buscarUltimoID = $DB->prepare($sqlLast);
-                $buscarUltimoID->execute();
-                $idDireccion = $buscarUltimoID->fetchAll();
-            }catch (Exception $ex) {
-                echo errorMessage($ex->getMessage());
-            }
-            
-*/
             $sqlUS = "INSERT INTO " . TABLE_USUARIO . " (`nombre`,`calle`, `colonia`, `estado`, `noExterior`, `noInterior`, `correo`, `password`, `telefono`, `username`) VALUES 
                 (:pt, :ca, :col, :es, :nex, :nint, :correo, :pdsc, :mkey, :mdesc)";
             
@@ -137,7 +49,6 @@ if (isset($_POST["sub"])) {
                 } catch (Exception $ex) {
                     echo errorMessage($ex->getMessage());
                 }
-        //}
     }else {
         $msg = errorMessage("Todos los campos son obligatorios");
     }
@@ -159,7 +70,6 @@ if (isset($_GET["edit"]) && $_GET["edit"] != "") {
 }
 */
 
-//*******************AQUI VA LA INTERFAZ */
 
 include("header.php");
 ?>
