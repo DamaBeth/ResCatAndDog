@@ -130,7 +130,7 @@ include("header.php");
                 </div>
 
                 <div class="rows">
-                    <div class="label"><span style="color:#F00;">*</span>Número interior: </div>
+                    <div class="label">Número interior: </div>
                     <div class="input-row" ><input name="noInterior" id="noInterior" type="text" class="textbox" autocomplete="off"></div>
                 </div>
 

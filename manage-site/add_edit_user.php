@@ -20,11 +20,8 @@ if (isset($_POST["sub"])) {
 
     $status = ($status <> "") ? $status : "I";
 
-
     if ($nombre <> "" && $username <> "" && $correo <> "" && $password <> "") {
-
-
-        if ($page_id <> "") {
+        if ($idUsuario <> "") {
 
             $sqlUS = "UPDATE " . TABLE_USUARIO . " SET  `nombre` =  :nom, "
                     . " `calle` =  :ca, `colonia` = :col, "
@@ -35,7 +32,7 @@ if (isset($_POST["sub"])) {
                     . " WHERE `idUsuario` = :pid";
             
             try {
-                $stmt = $DB->prepare($sql);
+                $stmt = $DB->prepare($sqlUS);
                 $stmt->bindValue(":nom", $nombre);
                 $stmt->bindValue(":ca", $calle);
                 $stmt->bindValue(":col", $colonia);
@@ -103,6 +100,7 @@ if (isset($_GET["edit"]) && $_GET["edit"] != "") {
         $stmt->bindValue(":pid", intval(db_prepare_input($_GET["edit"])));
         $stmt->execute();
         $details = $stmt->fetchAll();
+
     } catch (Exception $ex) {
         echo errorMessage($ex->getMessage());
     }
@@ -126,7 +124,7 @@ try {
 <link rel="stylesheet" type="text/css" href="CLEditor/jquery.cleditor.css" />
 <script type="text/javascript" src="js/jquery-1.9.0.min.js"></script>
 <script type="text/javascript" src="CLEditor/jquery.cleditor.min.js"></script>
-
+<!--
 <script type="text/javascript">
     $(document).ready(function() {
         $("#nombre").cleditor();
@@ -137,11 +135,12 @@ try {
         $("#nombre").val(title.toLowerCase());
     }
 </script>
-
+-->
 <?php echo $msg; ?>
 <div class="formField">      
     <form method="post" action="" name="users">
         <input type="hidden" name="idUsuario" value="<?php echo $details[0]["idUsuario"]; ?>"  />
+        
         <table id="tableForm">
             <tr>
                 <td class="formLeft"><span class="required">*</span>Nombre: </td>
@@ -164,7 +163,7 @@ try {
                 <td><input type="text" name="noExterior" id="noExterior" class="textboxes" value="<?php echo stripslashes($details[0]["noExterior"]); ?>" autocomplete="off"  onkeyup="changeAlias();"  /> </td>
             </tr>
             <tr>
-                <td class="formLeft"><span class="required">*</span>Número interior: </td>
+                <td class="formLeft">Número interior: </td>
                 <td><input type="text" name="noInterior" id="noInterior" class="textboxes" value="<?php echo stripslashes($details[0]["noInterior"]); ?>" autocomplete="off"  onkeyup="changeAlias();"  /> </td>
             </tr>
             <tr>
