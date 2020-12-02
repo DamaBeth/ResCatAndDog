@@ -7,15 +7,13 @@ if(!empty($_GET['id']))
         $id = checkInput($_GET['id']);
     }
 
-    $nombreError = $descripcionError = $edadError = $categoriaError = $tipoError = $fotoError = $nombre = $descripcion = $edad = $categoria = $tipo = $foto = "";
+    $nombreError = $descripcionError = $edadError = $fotoError = $nombre = $descripcion = $edad = $foto = "";
 
     if(!empty($_POST)) 
     {
         $nombre              = checkInput($_POST['nombre']);
         $descripcion         = checkInput($_POST['comentarios']);
         $edad                = checkInput($_POST['edad']);
-        $categoria           = checkInput($_POST['categoria']); 
-        $tipo                = checkInput($_POST['tipo']);
         $foto                = checkInput($_FILES["image"]["name"]);
         $imagePath           = 'ImagenesMascotas/'.basename($foto);
         $imageExtension      = pathinfo($imagePath,PATHINFO_EXTENSION);
@@ -36,17 +34,6 @@ if(!empty($_GET['id']))
             $edadError = 'Este campo no puede estar vacío';
             $isSuccess = false;
         } 
-         
-        if(empty($categoria)) 
-        {
-            $categoriaError = 'Este campo no puede estar vacío';
-            $isSuccess = false;
-        }
-        if(empty($tipo)) 
-        {
-            $tipoError = 'Este campo no puede estar vacío';
-            $isSuccess = false;
-        }
         if(empty($foto)) 
         {
             $isImageUpdated = false;
@@ -84,13 +71,13 @@ if(!empty($_GET['id']))
         { 
             if($isImageUpdated)
             {
-                $statement = $DB->prepare("UPDATE mascota  set nombre = ?, comentarios = ?, edad = ?, categoria = ?, tipo = ?, foto = ? WHERE idMascota = ?");
-                $statement->execute(array($nombre,$descripcion,$edad,$categoria,$tipo,$foto,$id));
+                $statement = $DB->prepare("UPDATE mascota  set nombre = ?, comentarios = ?, edad = ?, foto = ? WHERE idMascota = ?");
+                $statement->execute(array($nombre,$descripcion,$edad,$foto,$id));
             }
             else
             {
-                $statement = $DB->prepare("UPDATE mascota  set nombre = ?, comentarios = ?, edad = ?, categoria = ?, tipo = ? WHERE idMascota = ?");
-                $statement->execute(array($nombre,$descripcion,$edad,$categoria,$tipo,$id));
+                $statement = $DB->prepare("UPDATE mascota  set nombre = ?, comentarios = ?, edad = ? WHERE idMascota = ?");
+                $statement->execute(array($nombre,$descripcion,$edad,$id));
             }
             header("Location: admin-catalogo.php");
         }
@@ -110,8 +97,6 @@ if(!empty($_GET['id']))
         $nombre         = $mascota['nombre'];
         $descripcion    = $mascota['comentarios'];
         $edad           = $mascota['edad'];
-        $categoria      = $mascota['categoria'];
-        $tipo           = $mascota['tipo'];
         $foto           = $mascota['foto'];
     }
 
@@ -141,7 +126,9 @@ if(!empty($_GET['id']))
          <div class="container admin">
             <div class="row">
                 <div class="col-sm-6">
-                    <h1><strong>Detalles</strong></h1>
+                    <div class="detalles">
+                         <label> Detalles: </label>
+                    </div>
                     <br>
                     <form class="form" action="<?php echo 'modificar-mascota.php?id='.$id;?>" role="form" method="post" enctype="multipart/form-data">
                         <div class="form-group">
@@ -159,31 +146,8 @@ if(!empty($_GET['id']))
                             <input type="number" class="form-control" id="edad" name="edad" placeholder="Edad" value="<?php echo $edad;?>">
                             <span class="help-inline"><?php echo $edadError;?></span>
                         </div>
+                
                         <div class="form-group">
-                            <label for="description">Raza:
-                            <input type="text" class="form-control" id="tipo" name="tipo" placeholder="Raza" value="<?php echo $tipo;?>">
-                            <span class="help-inline"><?php echo $tipoError;?></span>
-                        </div>
-
-
-                        <div class="form-group">
-                            <label for="category">Categoría:
-                            <select class="form-control" id="categoria" name="categoria">
-                            <?php
-                               foreach ($DB->query('SELECT * FROM categorias') as $row) 
-                               {
-                                    if($row['id'] == $categoria)
-                                        echo '<option selected="selected" value="'. $row['id'] .'">'. $row['name'] . '</option>';
-                                    else
-                                        echo '<option value="'. $row['id'] .'">'. $row['name'] . '</option>';;
-                               }
-                            ?>
-                            </select>
-                            <span class="help-inline"><?php echo $categoriaError;?></span>
-                        </div>
-                        <div class="form-group">
-                            <label for="image">Imagen:</label>
-                            <p><?php echo $foto;?></p>
                             <label for="image">Selecciona una nueva imagen::</label>
                             <input type="file" id="image" name="image"> 
                             <span class="help-inline"><?php echo $fotoError;?></span>
@@ -202,7 +166,6 @@ if(!empty($_GET['id']))
                           <div class="caption">
                             <h4><?php echo $tipo;?></h4>
                             <p><?php echo $descripcion;?></p>
-                            <a href="#" class="btn btn-adoptar" role="button"><span class="glyphicon glyphicon-shopping-cart"></span> Adoptarr</a>
                           </div>
                     </div>
                 </div>
