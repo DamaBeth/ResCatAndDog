@@ -2,22 +2,22 @@
 
 require("libs/config.php");
 $pageDetails = getPageDetailsByName($currentPage);
-if(!empty($_GET['id'])) 
-    {
-        $id = checkInput($_GET['id']);
-    }
-
-    $nombreError = $descripcionError = $edadError = $fotoError = $nombre = $descripcion = $edad = $foto = "";
-
+$nombreError = $descripcionError = $edadError = $categoriaError = $tipoError = $fotoError = $sexoError = $cuidadorError = $nombre = $descripcion = $edad = $categoria = $tipo = $foto = $sexo = $cuidador = "";
     if(!empty($_POST)) 
     {
         $nombre              = checkInput($_POST['nombre']);
         $descripcion         = checkInput($_POST['comentarios']);
         $edad                = checkInput($_POST['edad']);
+        $categoria           = checkInput($_POST['categoria']); 
+        $tipo                = checkInput($_POST['tipo']);
         $foto                = checkInput($_FILES["image"]["name"]);
+        $estado              = "activo";
+        $sexo                = checkInput($_POST['sexo']); 
+        $cuidador            = "2";
         $imagePath           = 'ImagenesMascotas/'.basename($foto);
         $imageExtension      = pathinfo($imagePath,PATHINFO_EXTENSION);
         $isSuccess           = true;
+        $isUploadSuccess     = false;
        
         if(empty($nombre)) 
         {
@@ -34,13 +34,29 @@ if(!empty($_GET['id']))
             $edadError = 'Este campo no puede estar vacío';
             $isSuccess = false;
         } 
+         
+        if(empty($categoria)) 
+        {
+            $categoriaError = 'Este campo no puede estar vacío';
+            $isSuccess = false;
+        }
+        if(empty($tipo)) 
+        {
+            $tipoError = 'Este campo no puede estar vacío';
+            $isSuccess = false;
+        }
         if(empty($foto)) 
         {
-            $isImageUpdated = false;
+            $fotoError = 'Este campo no puede estar vacío';
+            $isSuccess = false;
+        }
+        if(empty($sexo)) 
+        {
+            $sexoError = 'Este campo no puede estar vacío';
+            $isSuccess = false;
         }
         else
         {
-            $isImageUpdated = true;
             $isUploadSuccess =true;
             if($imageExtension != "jpg" && $imageExtension != "png" && $imageExtension != "jpeg" && $imageExtension != "gif" ) 
             {
@@ -67,37 +83,12 @@ if(!empty($_GET['id']))
             } 
         }
          
-        if (($isSuccess && $isImageUpdated && $isUploadSuccess) || ($isSuccess && !$isImageUpdated)) 
-        { 
-            if($isImageUpdated)
-            {
-                $statement = $DB->prepare("UPDATE mascota  set nombre = ?, comentarios = ?, edad = ?, foto = ? WHERE idMascota = ?");
-                $statement->execute(array($nombre,$descripcion,$edad,$foto,$id));
-            }
-            else
-            {
-                $statement = $DB->prepare("UPDATE mascota  set nombre = ?, comentarios = ?, edad = ? WHERE idMascota = ?");
-                $statement->execute(array($nombre,$descripcion,$edad,$id));
-            }
-            header("Location: admin-catalogo.php");
-        }
-        else if($isImageUpdated && !$isUploadSuccess)
+        if($isSuccess && $isUploadSuccess) 
         {
-            $statement = $DB->prepare("SELECT * FROM mascota where idMascota = ?");
-            $statement->execute(array($id));
-            $mascota        = $statement->fetch();
-            $mascota        = $mascota['foto'];
+            $statement = $DB->prepare("INSERT INTO mascota (nombre,comentarios,edad,categoria,tipo,foto,estado,sexo,cuidador) values(?, ?, ?, ?, ?, ?, ?, ?, ?)");
+            $statement->execute(array($nombre,$descripcion,$edad,$categoria,$tipo,$foto,$estado,$sexo,$cuidador));
+            header("Location: cuidador-catalogo.php");
         }
-    }
-    else 
-    {
-        $statement = $DB->prepare("SELECT * FROM mascota where idMascota = ?");
-        $statement->execute(array($id));
-        $mascota = $statement->fetch();
-        $nombre         = $mascota['nombre'];
-        $descripcion    = $mascota['comentarios'];
-        $edad           = $mascota['edad'];
-        $foto           = $mascota['foto'];
     }
 
     function checkInput($data) 
@@ -122,52 +113,72 @@ if(!empty($_GET['id']))
     </head>
     
     <body>
-        <h1 class="text-logo"> Modificar datos de la mascota </h1>
+        <h1 class="text-logo"> Agregar una nueva mascota </h1>
          <div class="container admin">
             <div class="row">
                 <div class="col-sm-6">
                     <div class="detalles">
-                         <label> Detalles: </label>
+                         <label> Datos. </label>
                     </div>
                     <br>
-                    <form class="form" action="<?php echo 'modificar-mascota.php?id='.$id;?>" role="form" method="post" enctype="multipart/form-data">
+                    <form class="form" action="agregar-mascota-cuidador.php" role="form" method="post" enctype="multipart/form-data">
                         <div class="form-group">
-                            <label for="name">Nombre:
+                            <label for="name">Nombre: </label>
                             <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Nombre" value="<?php echo $nombre;?>">
                             <span class="help-inline"><?php echo $nombreError;?></span>
                         </div>
                         <div class="form-group">
-                            <label for="description">Descripción:
+                            <label for="description">Descripción: </label> 
                             <input type="text" class="form-control" id="comentarios" name="comentarios" placeholder="Descripción" value="<?php echo $descripcion;?>">
                             <span class="help-inline"><?php echo $descripcionError;?></span>
                         </div>
                         <div class="form-group">
-                        <label for="price">Edad (en meses):
+                        <label for="price">Edad (en meses): </label>
                             <input type="number" class="form-control" id="edad" name="edad" placeholder="Edad" value="<?php echo $edad;?>">
                             <span class="help-inline"><?php echo $edadError;?></span>
                         </div>
-                
                         <div class="form-group">
-                            <label for="image">Selecciona una nueva imagen::</label>
+                            <label for="description">Raza: </label>
+                            <input type="text" class="form-control" id="tipo" name="tipo" placeholder="Raza" value="<?php echo $tipo;?>">
+                            <span class="help-inline"><?php echo $tipoError;?></span>
+                        </div>
+
+
+                        <div class="form-group">
+                            <label for="category">Categoría: </label>
+                            <select class="form-control" id="categoria" name="categoria">
+                            <?php
+                               foreach ($DB->query("SELECT * FROM categorias WHERE id NOT IN ('1')") as $row) 
+                               {
+                                    echo '<option value="'. $row['id'] .'">'. $row['name'] . '</option>';;
+                               }
+                            ?>
+                            </select>
+                            <span class="help-inline"><?php echo $categoriaError;?></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="sex">Sexo: </label>
+                            <select class="form-control" id="sexo" name="sexo">
+                            <?php
+                                echo '<option value="Hembra">Hembra</option>';
+                                echo '<option value="Macho">Macho</option>';;
+                            ?>
+                            </select>
+                            <span class="help-inline"><?php echo $sexoError;?></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="image">Selecciona una imagen:</label>
                             <input type="file" id="image" name="image"> 
                             <span class="help-inline"><?php echo $fotoError;?></span>
                         </div>
                         <br>
                         <div class="form-actions">
-                            <button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-pencil"></span> Modificar</button>
-                            <a class="btn btn-primary" href="admin-catalogo.php"><span class="glyphicon glyphicon-arrow-left"></span> Regresar</a>
+                            <button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-pencil"></span> Agregar</button>
+                            <a class="btn btn-primary" href="cuidador-catalogo.php"><span class="glyphicon glyphicon-arrow-left"></span> Regresar</a>
                        </div>
                     </form>
-                </div>
-                <div class="col-sm-6 site">
-                    <div class="thumbnail">
-                        <img src="<?php echo 'ImagenesMascotas/'.$foto;?>" alt="...">
-                        <div class="price"><?php echo $nombre;?></div>
-                          <div class="caption">
-                            <h4><?php echo $tipo;?></h4>
-                            <p><?php echo $descripcion;?></p>
-                          </div>
-                    </div>
                 </div>
             </div>
         </div>   

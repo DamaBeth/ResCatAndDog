@@ -6,7 +6,7 @@ if(!empty($_GET['id']))
     {
         $id = checkInput($_GET['id']);
     }
-    $statement = $DB->prepare("SELECT mascota.idMascota, mascota.nombre, mascota.comentarios, mascota.edad, mascota.foto, mascota.tipo, categorias.name AS categoria FROM mascota LEFT JOIN categorias ON mascota.categoria = categorias.id WHERE mascota.idMascota = ?");
+    $statement = $DB->prepare("SELECT mascota.idMascota, mascota.nombre, mascota.comentarios, mascota.edad, mascota.foto, mascota.tipo, mascota.sexo, categorias.name AS categoria, usuario.nombre AS nameUser, usuario.telefono AS telUser FROM mascota LEFT JOIN categorias ON mascota.categoria = categorias.id JOIN cuidador ON mascota.cuidador = cuidador.idCuidador JOIN usuario ON cuidador.idUsuario = usuario.idUsuario WHERE mascota.idMascota = ?");
     $statement->execute(array($id));
     $mascota = $statement->fetch();
 
@@ -33,7 +33,7 @@ include("header.php");
     </head>
     
     <body class="cuerpo">
-        <h1 class="text-logo"> Huellita </h1>
+        <h1 class="text-logo"> Ver mascota </h1>
          <div class="container admin">
             <div class="row">
                <div class="col-sm-6">
@@ -56,6 +56,15 @@ include("header.php");
                       </div>
                       <div class="form-group">
                         <label>Raza:</label><?php echo '  '.$mascota['tipo'];?>
+                      </div>
+                      <div class="form-group">
+                        <label>Sexo:</label><?php echo '  '.$mascota['sexo'];?>
+                      </div>
+                      <div class="form-group">
+                        <label>Nombre del cuidador:</label><?php echo '  '.$mascota['nameUser'];?>
+                      </div>
+                      <div class="form-group">
+                        <label>Teléfono del usuario:</label><?php echo '  '.$mascota['telUser'];?>
                       </div>
                     </form>
                     <br>

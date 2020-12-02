@@ -6,6 +6,9 @@ $pageDetails = getPageDetailsByName($currentPage);
     {
         $id = checkInput($_GET['id']);
     }
+    $statement = $DB->prepare("SELECT idMascota, nombre, comentarios, foto, tipo FROM mascota WHERE mascota.idMascota = ?");
+    $statement->execute(array($id));
+    $mascota = $statement->fetch();
 
     if(!empty($_POST)) 
     {
@@ -14,6 +17,7 @@ $pageDetails = getPageDetailsByName($currentPage);
         $statement->execute(array($id));
         header("Location: admin-catalogo.php"); 
     }
+    
 
     function checkInput($data) 
     {
@@ -38,20 +42,34 @@ $pageDetails = getPageDetailsByName($currentPage);
     </head>
     
     <body>
-        <h1 class="text-logo"><span class="glyphicon glyphicon-cutlery"></span> Eliminar una mascota <span class="glyphicon glyphicon-cutlery"></span></h1>
+        <h1 class="text-logo"> Eliminar una mascota </h1>
          <div class="container admin">
             <div class="row">
-                <h1><strong>Confirmar operación</strong></h1>
-                <br>
-                <form class="form" action="eliminar-mascota.php" role="form" method="post">
-                    <input type="hidden" name="id" value="<?php echo $id;?>"/>
-                    <p class="alert alert-warning">¿Estás seguro que deseas eliminar esta mascota del catálogo?</p>
-                    <div class="form-actions">
-                      <button type="submit" class="btn btn-warning">Aceptar</button>
-                      <a class="btn btn-default" href="admin-catalogo.php">Cancelar</a>
+                <div class="col-sm-6">
+                    <div class="detalles">
+                         <label> Confirmar operación: </label>
                     </div>
-                </form>
-            </div>
+                    <br>
+                    <form class="form" action="eliminar-mascota.php" role="form" method="post">
+                        <input type="hidden" name="id" value="<?php echo $id;?>"/>
+                        <p class="alert alert-warning">¿Estás seguro que deseas eliminar esta mascota del catálogo?</p>
+                        <div class="form-actions">
+                        <button type="submit" class="btn btn-warning">Aceptar</button>
+                        <a class="btn btn-default" href="admin-catalogo.php">Cancelar</a>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-sm-6 site">
+                    <div class="thumbnail">
+                        <img src="<?php echo 'ImagenesMascotas/'.$mascota['foto'];?>" alt="...">
+                        <div class="price"><?php echo $mascota['nombre'];?></div>
+                          <div class="caption">
+                            <h4><?php echo $mascota['tipo'];?></h4>
+                            <p><?php echo $mascota['comentarios'];?></p>
+                        </div>
+                    </div>
+                </div>  
+            </div>  
         </div>   
     </body>
 </html>

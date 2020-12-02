@@ -2,7 +2,7 @@
 
 require("libs/config.php");
 $pageDetails = getPageDetailsByName($currentPage);
-$nombreError = $descripcionError = $edadError = $categoriaError = $tipoError = $fotoError = $nombre = $descripcion = $edad = $categoria = $tipo = $foto = "";
+$nombreError = $descripcionError = $edadError = $categoriaError = $tipoError = $fotoError = $sexoError = $cuidadorError = $nombre = $descripcion = $edad = $categoria = $tipo = $foto = $sexo = $cuidador = "";
     if(!empty($_POST)) 
     {
         $nombre              = checkInput($_POST['nombre']);
@@ -12,10 +12,12 @@ $nombreError = $descripcionError = $edadError = $categoriaError = $tipoError = $
         $tipo                = checkInput($_POST['tipo']);
         $foto                = checkInput($_FILES["image"]["name"]);
         $estado              = "activo";
+        $sexo                = checkInput($_POST['sexo']);
+        $cuidador            = checkInput($_POST['cuidador']); 
         $imagePath           = 'ImagenesMascotas/'.basename($foto);
         $imageExtension      = pathinfo($imagePath,PATHINFO_EXTENSION);
         $isSuccess           = true;
-        $isUploadSuccess    = false;
+        $isUploadSuccess     = false;
        
         if(empty($nombre)) 
         {
@@ -48,6 +50,16 @@ $nombreError = $descripcionError = $edadError = $categoriaError = $tipoError = $
             $fotoError = 'Este campo no puede estar vacío';
             $isSuccess = false;
         }
+        if(empty($sexo)) 
+        {
+            $sexoError = 'Este campo no puede estar vacío';
+            $isSuccess = false;
+        }
+        if(empty($cuidador)) 
+        {
+            $cuidadorError = 'Este campo no puede estar vacío';
+            $isSuccess = false;
+        }
         else
         {
             $isUploadSuccess =true;
@@ -78,8 +90,8 @@ $nombreError = $descripcionError = $edadError = $categoriaError = $tipoError = $
          
         if($isSuccess && $isUploadSuccess) 
         {
-            $statement = $DB->prepare("INSERT INTO mascota (nombre,comentarios,edad,categoria,tipo,foto,estado) values(?, ?, ?, ?, ?, ?, ?)");
-            $statement->execute(array($nombre,$descripcion,$edad,$categoria,$tipo,$foto,$estado));
+            $statement = $DB->prepare("INSERT INTO mascota (nombre,comentarios,edad,categoria,tipo,foto,estado,sexo,cuidador) values(?, ?, ?, ?, ?, ?, ?, ?, ?)");
+            $statement->execute(array($nombre,$descripcion,$edad,$categoria,$tipo,$foto,$estado,$sexo,$cuidador));
             header("Location: admin-catalogo.php");
         }
     }
@@ -110,7 +122,9 @@ $nombreError = $descripcionError = $edadError = $categoriaError = $tipoError = $
          <div class="container admin">
             <div class="row">
                 <div class="col-sm-6">
-                    <h1><strong>Datos.</strong></h1>
+                    <div class="detalles">
+                         <label> Datos. </label>
+                    </div>
                     <br>
                     <form class="form" action="agregar-mascota.php" role="form" method="post" enctype="multipart/form-data">
                         <div class="form-group">
@@ -139,7 +153,7 @@ $nombreError = $descripcionError = $edadError = $categoriaError = $tipoError = $
                             <label for="category">Categoría: </label>
                             <select class="form-control" id="categoria" name="categoria">
                             <?php
-                               foreach ($DB->query('SELECT * FROM categorias') as $row) 
+                               foreach ($DB->query("SELECT * FROM categorias WHERE id NOT IN ('1')") as $row) 
                                {
                                     echo '<option value="'. $row['id'] .'">'. $row['name'] . '</option>';;
                                }
@@ -147,6 +161,31 @@ $nombreError = $descripcionError = $edadError = $categoriaError = $tipoError = $
                             </select>
                             <span class="help-inline"><?php echo $categoriaError;?></span>
                         </div>
+
+                        <div class="form-group">
+                            <label for="sex">Sexo: </label>
+                            <select class="form-control" id="sexo" name="sexo">
+                            <?php
+                                echo '<option value="Hembra">Hembra</option>';
+                                echo '<option value="Macho">Macho</option>';;
+                            ?>
+                            </select>
+                            <span class="help-inline"><?php echo $sexoError;?></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="cuidador">Cuidador: </label>
+                            <select class="form-control" id="cuidador" name="cuidador">
+                            <?php
+                               foreach ($DB->query("SELECT cuidador.idCuidador AS idCui, usuario.nombre AS nameUser FROM cuidador JOIN usuario ON cuidador.idUsuario = usuario.idUsuario") as $row) 
+                               {
+                                    echo '<option value="'. $row['idCui'] .'">'. $row['nameUser'] . '</option>';;
+                               }
+                            ?>
+                            </select>
+                            <span class="help-inline"><?php echo $cuidadorError;?></span>
+                        </div>
+
                         <div class="form-group">
                             <label for="image">Selecciona una imagen:</label>
                             <input type="file" id="image" name="image"> 
