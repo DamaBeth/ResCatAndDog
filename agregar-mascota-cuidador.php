@@ -180,6 +180,11 @@ $nombreError = $descripcionError = $edadError = $categoriaError = $tipoError = $
                        </div>
                     </form>
                 </div>
+                <div class="col-sm-6">
+                    <div class="thumbnail">
+                        <img src="<?php echo 'ImagenesMascotas/animales.png'?>" alt="...">
+                    </div>
+                </div>
             </div>
         </div>   
     </body>

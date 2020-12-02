@@ -84,7 +84,7 @@ if(!empty($_GET['id']))
                 $statement = $DB->prepare("UPDATE mascota  set nombre = ?, comentarios = ?, edad = ? WHERE idMascota = ?");
                 $statement->execute(array($nombre,$descripcion,$edad,$id));
             }
-            header("Location: admin-catalogo.php"); 
+            header("Location: catalog.php"); 
         }
         else if($isImageUpdated && !$isUploadSuccess)
         {
