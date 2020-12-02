@@ -36,7 +36,7 @@ $id = 1; /*id del cuidador que está logueado*/
                   </thead>
                   <tbody>
                       <?php
-                        $statement = $DB->query("SELECT mascota.idMascota, mascota.nombre, mascota.comentarios, mascota.tipo, categorias.name AS categoria, usuario.nombre AS nameUser, usuario.telefono AS telUser FROM mascota LEFT JOIN categorias ON mascota.categoria = categorias.id JOIN cuidador ON mascota.cuidador = cuidador.idCuidador JOIN usuario ON cuidador.idUsuario = usuario.idUsuario WHERE mascota.estado = 'activo' AND mascota.cuidador = '1' ORDER BY mascota.idMascota DESC");
+                        $statement = $DB->query("SELECT mascota.idMascota, mascota.nombre, mascota.comentarios, mascota.tipo, categorias.name AS categoria, usuario.nombre AS nameUser, usuario.telefono AS telUser FROM mascota LEFT JOIN categorias ON mascota.categoria = categorias.id JOIN cuidador ON mascota.cuidador = cuidador.idCuidador JOIN usuario ON cuidador.idUsuario = usuario.idUsuario WHERE mascota.estado = 'activo' AND mascota.cuidador = '2' ORDER BY mascota.idMascota DESC");
                         /*$statement->execute(array($id));*/
                         while($mascota = $statement->fetch()) 
                         {

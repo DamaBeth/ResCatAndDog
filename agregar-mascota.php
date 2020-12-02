@@ -2,7 +2,7 @@
 
 require("libs/config.php");
 $pageDetails = getPageDetailsByName($currentPage);
-$nombreError = $descripcionError = $edadError = $categoriaError = $tipoError = $fotoError = $sexoError = $nombre = $descripcion = $edad = $categoria = $tipo = $foto = $sexo= "";
+$nombreError = $descripcionError = $edadError = $categoriaError = $tipoError = $fotoError = $sexoError = $cuidadorError = $nombre = $descripcion = $edad = $categoria = $tipo = $foto = $sexo = $cuidador = "";
     if(!empty($_POST)) 
     {
         $nombre              = checkInput($_POST['nombre']);
@@ -13,10 +13,11 @@ $nombreError = $descripcionError = $edadError = $categoriaError = $tipoError = $
         $foto                = checkInput($_FILES["image"]["name"]);
         $estado              = "activo";
         $sexo                = checkInput($_POST['sexo']);
+        $cuidador            = checkInput($_POST['cuidador']); 
         $imagePath           = 'ImagenesMascotas/'.basename($foto);
         $imageExtension      = pathinfo($imagePath,PATHINFO_EXTENSION);
         $isSuccess           = true;
-        $isUploadSuccess    = false;
+        $isUploadSuccess     = false;
        
         if(empty($nombre)) 
         {
@@ -54,6 +55,11 @@ $nombreError = $descripcionError = $edadError = $categoriaError = $tipoError = $
             $sexoError = 'Este campo no puede estar vacío';
             $isSuccess = false;
         }
+        if(empty($cuidador)) 
+        {
+            $cuidadorError = 'Este campo no puede estar vacío';
+            $isSuccess = false;
+        }
         else
         {
             $isUploadSuccess =true;
@@ -84,8 +90,8 @@ $nombreError = $descripcionError = $edadError = $categoriaError = $tipoError = $
          
         if($isSuccess && $isUploadSuccess) 
         {
-            $statement = $DB->prepare("INSERT INTO mascota (nombre,comentarios,edad,categoria,tipo,foto,estado,sexo) values(?, ?, ?, ?, ?, ?, ?, ?)");
-            $statement->execute(array($nombre,$descripcion,$edad,$categoria,$tipo,$foto,$estado,$sexo));
+            $statement = $DB->prepare("INSERT INTO mascota (nombre,comentarios,edad,categoria,tipo,foto,estado,sexo,cuidador) values(?, ?, ?, ?, ?, ?, ?, ?, ?)");
+            $statement->execute(array($nombre,$descripcion,$edad,$categoria,$tipo,$foto,$estado,$sexo,$cuidador));
             header("Location: admin-catalogo.php");
         }
     }
@@ -165,6 +171,19 @@ $nombreError = $descripcionError = $edadError = $categoriaError = $tipoError = $
                             ?>
                             </select>
                             <span class="help-inline"><?php echo $sexoError;?></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="cuidador">Cuidador: </label>
+                            <select class="form-control" id="cuidador" name="cuidador">
+                            <?php
+                               foreach ($DB->query("SELECT cuidador.idCuidador AS idCui, usuario.nombre AS nameUser FROM cuidador JOIN usuario ON cuidador.idUsuario = usuario.idUsuario") as $row) 
+                               {
+                                    echo '<option value="'. $row['idCui'] .'">'. $row['nameUser'] . '</option>';;
+                               }
+                            ?>
+                            </select>
+                            <span class="help-inline"><?php echo $cuidadorError;?></span>
                         </div>
 
                         <div class="form-group">
