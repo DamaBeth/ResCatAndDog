@@ -98,7 +98,7 @@
 			right: 40px;
 			top: 1px;
 			line-height: 84px;
-			text-transform: lowercase;
+			/*text-transform: lowercase;*/
 			font-size: 1.3em;
 			letter-spacing: -1px;
 		}
@@ -136,7 +136,7 @@
 /* Banner */
 
 	#banner-wrapper {
-		background: #c8d2bc url(images/bg1.png);
+		background: #f9c2fd url(images/bg1.png);
 	}
 
 	#banner {
@@ -151,6 +151,66 @@
 		background-size: 1160px 265px;
 	}
 
+	#bannerAU {
+		position: relative;
+		width: 1160px;
+		height: 265px;
+		margin: 2% 0 2% 0;
+		box-shadow: 0px 2px 4px 0px rgba(0,0,0,0.10);
+		border-radius: 10px;
+		padding: 20px;
+		background: #fff url(images/nosotros.jpg) no-repeat 20px 20px;
+		background-size: 1160px 265px;
+	}
+
+	#bannerCat {
+		position: relative;
+		width: 1160px;
+		height: 265px;
+		margin: 2% 0 2% 0;
+		box-shadow: 0px 2px 4px 0px rgba(0,0,0,0.10);
+		border-radius: 10px;
+		padding: 20px;
+		background: #fff url(images/catalogo.jpg) no-repeat 20px 20px;
+		background-size: 1160px 265px;
+	}
+
+	#bannerSU {
+		position: relative;
+		width: 1160px;
+		height: 265px;
+		margin: 2% 0 2% 0;
+		box-shadow: 0px 2px 4px 0px rgba(0,0,0,0.10);
+		border-radius: 10px;
+		padding: 20px;
+		background: #fff url(images/registro.jpg) no-repeat 20px 20px;
+		background-size: 1160px 265px;
+	}
+
+	#bannerLI {
+		position: relative;
+		width: 1160px;
+		height: 265px;
+		margin: 2% 0 2% 0;
+		box-shadow: 0px 2px 4px 0px rgba(0,0,0,0.10);
+		border-radius: 10px;
+		padding: 20px;
+		background: #fff url(images/login.jpg) no-repeat 20px 20px;
+		background-size: 1160px 265px;
+	}
+
+	#bannerSB {
+		position: relative;
+		width: 263px;
+		height: 42px;
+		margin: 2% 0 2% 0;
+		/*box-shadow: 0px 2px 4px 0px rgba(0,0,0,0.10);
+		*/border-radius: 10px;
+		padding: 20px;
+		background: #fff url(images/sideBar.jpg) no-repeat;
+		background-size: 263px 42px;
+	}
+
 		#banner h2 {
 			position: absolute;
 			z-index: 1;
@@ -159,7 +219,7 @@
 			left: 0;
 			font-size: 3.3em;
 			color: #fff;
-			text-align: center;
+			text-align: left;
 			letter-spacing: -2px;
 		}
 		
@@ -172,9 +232,9 @@
 			left: 0;
 			font-size: 1.6em;
 			color: #fff;
-			text-align: center;
-			letter-spacing: -1px;
-			text-transform: lowercase;
+			text-align: right;
+			letter-spacing: 1px;
+			/*text-transform: lowercase;*/
 			opacity: 0.8;
 		}
 
@@ -192,17 +252,18 @@
 
 	#footer-wrapper {
 		padding: 0 0 1% 0;
+		background: #f9c2fd url(images/bg1.png);
 	}
 
 /* Copyright */
 
 	#copyright {
 		text-align: center;
-		color: #A6A88F;
+		color: #000000;
 		padding: 1em 0 0 0;
 		margin: 1% 0 0 0;
 	}
 
 		#copyright a {
-			color: #A6A88F;
+			color: #000000;
 		}

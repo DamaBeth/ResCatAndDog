@@ -15,9 +15,10 @@
 	body {
 		font-size: 13.5pt;
 		font-family: sans-serif;
-		background-color: #e3e9dc;
+		/*Fondo del footer o general*/
+		background-color: #f5d6f7;
 		font-family: 'Ubuntu Condensed', sans-serif;
-		color: #878e83;
+		color: #262f30;
 		letter-spacing: -1px;
 	}
 
@@ -27,14 +28,14 @@
 	}
 
 	h1,h2 {
-		text-transform: lowercase;
+		/*text-transform: lowercase;*/
 	}
 
 	h2 {
 		font-size: 1.6em;
 		letter-spacing: -1px;
 		margin-bottom: 0.5em;
-		text-transform:lowercase;
+		/*text-transform:lowercase;*/
 	}
 
 	h3,h4 {
@@ -125,7 +126,7 @@
 	}
 
 		ul.link-list li {
-			border-top: solid 1px #ced0b7;
+			border-top: solid 1px #63bcdf;
 			padding: 0.75em 0 0 0;
 			margin: 0.75em 0 0 0;
 		}
@@ -147,7 +148,7 @@
 		background-image: -o-linear-gradient(top, #008dad, #007b9d);
 		background-image: linear-gradient(top, #008dad, #007b9d);
 		border-radius: 10px;
-		text-transform: lowercase;
+		/*text-transform: lowercase;*/
 		text-decoration: none;
 		color: #fff;
 		font-size: 1.2em;

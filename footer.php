@@ -5,7 +5,12 @@
 				<div class="row">
 					<div class="12u">
 						<div id="copyright">
-							 &copy; HTML5 UP</a> 
+							<h2>Benemérita universidad autónoma de Puebla</h2> <br><br>
+							Modelos de desarrollo Web - Otoño 2020 <br><br>
+							Carmona Avendaño Lluvia Naomy -  201731153 <br> 
+							Quiroz Cuautle Damaris Lizbeth -  201744183<br>
+							Rodríguez Vázquez Lizbeth - 201730144
+							</a> 
 						</div>
 					</div>
 				</div>
