@@ -8,19 +8,32 @@ if (isset($_POST["sbtn"])) {
 	$password = db_prepare_input($_POST["password"]);
 	
 	if ($correo <> "" && $password <> "") {
+		//$sql = "SELECT `idUsuario`, `nombre` from " . TABLE_USUARIO .  "where `correo` = :correo and  `password` = :pass ";
 
+
+		$sql = " select idUsuario, nombre from usuario where correo= :correo and password= :pass ;";
+        
+		try{
+			$stmt = $DB->prepare($sql);
+			$stmt->bindValue(":correo", $correo);
+			$stmt->bindValue(":pass", $password);
+
+			$stmt->execute();
+
+			if ($stmt->rowCount() > 0) {
+				simple_redirect("login.php?msg=success");
+			} else if ($stmt->rowCount() == 0) {
+				simple_redirect("login.php?msg=error");
+			} else {
+				simple_redirect("login.php?msg=error");
+			}
+        } catch (Exception $ex) {
+			echo errorMessage($ex->getMessage());
+        }
 	}else{
 		$msg = errorMessage("Todos los campos son obligatorios");
 	}
 
-	$to = "lluvia_naomy@hotmail.com";
-	
-	$res = @mail($to, $subject);	
-	if ($res) {
-		simple_redirect("login.php?msg=success");
-	} else {
-		simple_redirect("login.php?msg=error");
-	}
 }
 include("header.php");
 ?>
@@ -29,7 +42,6 @@ include("header.php");
 .rows{ width:100%; height:auto; overflow:hidden; margin-bottom:10px; }
 .label{ width:100px;color:#000; float:left;padding-top:5px;}
 .input-row{ width:280px; height:32px; background-color:#FFF; float:left; position:relative; }
-.input-textarea-row{ width:280px; height:65px; background-color:#FFF; float:left; position:relative; }
 .textbox{ width:100%; height:24px;  border:1px solid #007294;outline:none; background:transparent; color:#000; padding:0px;  }
 .textarea{ width:100%; height:57px;  border:1px solid #007294; outline:none; background:transparent; color:#000; padding:0px;  }
 .submit_button{background:#118eb1;padding:2px;border:none;cursor:pointer;}
@@ -51,7 +63,7 @@ function validateForm() {
         alert("Enter your email");
 		$("#correo").focus();
         return false;
-    } else if (!IsEmail(email)) {
+    } else if (!IsEmail(correo)) {
         alert("Enter valid email");
 		$("#correo").focus();
         return false;
@@ -74,9 +86,9 @@ function validateForm() {
 
       <div style="height:30px;clear:both"></div>
       <?php if ($_GET["msg"] == "success") { ?>
-      <div class="success">Thank you for contacting us. We will get back to you withinh 24 hours.</div>
+      <div class="success">Imaginemos que ya ingresaste :)</div>
       <?php } if ($_GET["msg"] == "error") {  ?>
-      <div class="error">There was problem sending mail. please try again or try later.</div>
+      <div class="error">Correo o contraseña incorrectos. Intenta de nuevo por favor</div>
       <?php } ?>
       <form action="login.php" method="post" name="f" onsubmit="return validateForm();">
         
