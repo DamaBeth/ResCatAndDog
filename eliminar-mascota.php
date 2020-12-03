@@ -20,7 +20,7 @@ $pageDetails = getPageDetailsByName($currentPage);
             $id = checkInput($_POST['id']);
             $statement = $DB->prepare("UPDATE mascota SET estado = 'inactivo' WHERE idMascota = ?");
             $statement->execute(array($id));
-            header("Location: catalog.php"); 
+            header("Location: cuidador-catalogo.php"); 
         }
     /*}*/
     

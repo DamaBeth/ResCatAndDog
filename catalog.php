@@ -2,7 +2,7 @@
 
 require("libs/config.php");
 $pageDetails = getPageDetailsByName($currentPage);
-$idTipoUser = '4'; /*id del tipo de usuario 1:admin, 2:cuidador, 3:adoptante, 4:visitante*/
+$idTipoUser = '1'; /*id del tipo de usuario 1:admin, 2:cuidador, 3:adoptante, 4:visitante*/
 
 include("header.php");
 ?>
@@ -65,7 +65,7 @@ include("header.php");
                                                         <p>' . $mascota['comentarios'] . '</p>
                                                         <div class="left-contentCatag">';
                                                         if($idTipoUser == '3'){
-                                                            echo '<a href="creaSolicitud.php?idM='.$mascota['idMascota'].'" class="btn btn-adoptar" role="button"> Adoptar</a>';
+                                                            echo '<a href="#" class="btn btn-adoptar" role="button"> Adoptar</a>';
                                                         }elseif($idTipoUser != '1' && $idTipoUser != '2'){
                                                             echo '<a href="login.php" class="btn btn-adoptar" role="button"> Adoptar</a>';
                                                         }
@@ -96,15 +96,9 @@ include("header.php");
                                                 <div class="caption">
                                                     <h4>' . $mascota['tipo'] . '</h4>
                                                     <p>' . $mascota['comentarios'] . '</p>
-                                                    // <div class="left-contentCatag">
-                                                    //         <a href="creaSolicitud.php?idM='.$mascota['idMascota'].'" class="btn btn-adoptar" role="button"> Adoptar</a>
-                                                    //     </div>
-                                                    //     <div class="left-contentCatag">
-                                                    //         <a href="ver-mascota.php?idM='.$mascota['idMascota'].'" class="btn btn-info" role="button"> Ver</a>
-                                                    // </div> 
                                                     <div class="left-contentCatag">';
                                                     if($idTipoUser == '3'){
-                                                        echo '<a href="creaSolicitud.php?idM='.$mascota['idMascota'].'" class="btn btn-adoptar" role="button"> Adoptar</a>';
+                                                        echo '<a href="#" class="btn btn-adoptar" role="button"> Adoptar</a>';
                                                     }elseif($idTipoUser != '1' && $idTipoUser != '2'){
                                                         echo '<a href="login.php" class="btn btn-adoptar" role="button"> Adoptar</a>';
                                                     }

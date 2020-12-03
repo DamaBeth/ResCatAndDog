@@ -2,7 +2,7 @@
 
 require("libs/config.php");
 $pageDetails = getPageDetailsByName($currentPage);
-$idUserCuidador = "1"; /*id del cuidador que está logueado*/
+$idUserCuidador = "2"; /*id del cuidador que está logueado*/
 $idTipoUser = "2" /*id del tipo de usuario 1:admin, 2:cuidador, 3:adoptante, 4:visitante*/
 ?>
 <!DOCTYPE html>
@@ -23,7 +23,7 @@ $idTipoUser = "2" /*id del tipo de usuario 1:admin, 2:cuidador, 3:adoptante, 4:v
         <div class="container admin">
             <div class="row">
                 <div class="detalles">
-                    <label>Lista de mascotas </label>  <a href="agregar-mascota-cuidador.php" class="btn btn-success btn-lg"><span class="glyphicon glyphicon-plus"></span>Agregar una mascota</a></h1>
+                    <label>Tus mascotas </label>  <a href="agregar-mascota-cuidador.php" class="btn btn-success btn-lg"><span class="glyphicon glyphicon-plus"></span>Agregar una mascota</a></h1>
                 </div>
                 <table class="table table-striped table-bordered">
                   <thead>
