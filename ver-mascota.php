@@ -6,8 +6,11 @@ if(!empty($_GET['id']))
     {
         $id = checkInput($_GET['id']);
     }
-    
-    $statement = $DB->prepare("SELECT mascota.idMascota, mascota.nombre, mascota.comentarios, mascota.edad, mascota.foto, mascota.tipo, categorias.name AS categoria FROM mascota LEFT JOIN categorias ON mascota.categoria = categorias.id WHERE mascota.idMascota = ?");
+    if(!empty($_GET['idTipoUser'])) 
+    {
+        $idTipoUser = checkInput($_GET['idTipoUser']);
+    }
+    $statement = $DB->prepare("SELECT mascota.idMascota, mascota.nombre, mascota.comentarios, mascota.edad, mascota.foto, mascota.tipo, mascota.sexo, categorias.name AS categoria, usuario.nombre AS nameUser, usuario.telefono AS telUser, usuario.correo AS emailUser FROM mascota LEFT JOIN categorias ON mascota.categoria = categorias.id JOIN cuidador ON mascota.cuidador = cuidador.idCuidador JOIN usuario ON cuidador.idUsuario = usuario.idUsuario WHERE mascota.idMascota = ?");
     $statement->execute(array($id));
     $mascota = $statement->fetch();
 
@@ -34,7 +37,7 @@ include("header.php");
     </head>
     
     <body class="cuerpo">
-        <h1 class="text-logo"> Huellita </h1>
+        <h1 class="text-logo"> Ver mascota </h1>
          <div class="container admin">
             <div class="row">
                <div class="col-sm-6">
@@ -58,11 +61,41 @@ include("header.php");
                       <div class="form-group">
                         <label>Raza:</label><?php echo '  '.$mascota['tipo'];?>
                       </div>
+                      <div class="form-group">
+                        <label>Sexo:</label><?php echo '  '.$mascota['sexo'];?>
+                      </div>
+                      <div class="form-group">
+                        <label>Nombre del cuidador:</label><?php echo '  '.$mascota['nameUser'];?>
+                      </div>
+                      <div class="form-group">
+                        <label>Teléfono del cuidador:</label><?php echo '  '.$mascota['telUser'];?>
+                      </div>
+                      <div class="form-group">
+                        <label>Correo eletrónico del cuidador:</label><?php echo '  '.$mascota['emailUser'];?>
+                      </div>
                     </form>
                     <br>
-                    <div class="form-actions">
-                      <a class="btn btn-primary" href="catalog.php"><span class="glyphicon glyphicon-arrow-left"></span> Regresar</a>
-                    </div>
+                    <?php
+                        if($idTipoUser == '1'){
+                            echo '<div class="col-sm-6">';
+                            echo    '<a class="btn btn-primary" href="admin-catalogo.php"><span class="glyphicon glyphicon-arrow-left"></span> Administar catálogo</a>';
+                            echo '</div>';
+                            echo '<div class="col-sm-6">';
+                            echo    '<a class="btn btn-primary" href="catalog.php"><span class="glyphicon glyphicon-arrow-left"></span> Regresar al catálogo</a>';
+                            echo '</div>';
+                        }elseif($idTipoUser == '2'){
+                            echo '<div class="col-sm-6">';
+                            echo    '<a class="btn btn-primary" href="cuidador-catalogo.php"><span class="glyphicon glyphicon-arrow-left"></span> Administrar catálogo</a>';
+                            echo '</div>';
+                            echo '<div class="col-sm-6">';
+                            echo    '<a class="btn btn-primary" href="catalog.php"><span class="glyphicon glyphicon-arrow-left"></span> Regresar al catálogo</a>';
+                            echo '</div>';
+                        }else{
+                            echo '<div class="form-actions">';
+                            echo    '<a class="btn btn-primary" href="catalog.php"><span class="glyphicon glyphicon-arrow-left"></span> Regresar</a>';
+                            echo '</div>';
+                        }
+                    ?>
                 </div> 
                 <div class="col-sm-6 site">
                     <div class="thumbnail">
@@ -71,8 +104,13 @@ include("header.php");
                           <div class="caption">
                             <h4><?php echo $mascota['tipo'];?></h4>
                             <p><?php echo $mascota['comentarios'];?></p>
-                            <!-- Arreglar el envío de id de Mascota desde aquí -->
-                            <a href="creaSolicitud.php?idM=" class="btn btn-adoptar" role="button"> Adoptar</a>
+                            <?php
+                                if($idTipoUser == '3'){
+                                    echo '<a href="creaSolicitud.php?idM=" class="btn btn-adoptar" role="button"> Adoptar</a>';
+                                }elseif($idTipoUser != '1' && $idTipoUser != '2'){
+                                    echo '<a href="login.php" class="btn btn-adoptar" role="button"> Adoptar</a>';
+                                }
+                            ?>
                           </div>
                     </div>
                 </div>

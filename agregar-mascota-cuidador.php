@@ -12,8 +12,8 @@ $nombreError = $descripcionError = $edadError = $categoriaError = $tipoError = $
         $tipo                = checkInput($_POST['tipo']);
         $foto                = checkInput($_FILES["image"]["name"]);
         $estado              = "activo";
-        $sexo                = checkInput($_POST['sexo']);
-        $cuidador            = checkInput($_POST['cuidador']); 
+        $sexo                = checkInput($_POST['sexo']); 
+        $cuidador            = "2";
         $imagePath           = 'ImagenesMascotas/'.basename($foto);
         $imageExtension      = pathinfo($imagePath,PATHINFO_EXTENSION);
         $isSuccess           = true;
@@ -55,11 +55,6 @@ $nombreError = $descripcionError = $edadError = $categoriaError = $tipoError = $
             $sexoError = 'Este campo no puede estar vacío';
             $isSuccess = false;
         }
-        if(empty($cuidador)) 
-        {
-            $cuidadorError = 'Este campo no puede estar vacío';
-            $isSuccess = false;
-        }
         else
         {
             $isUploadSuccess =true;
@@ -92,7 +87,7 @@ $nombreError = $descripcionError = $edadError = $categoriaError = $tipoError = $
         {
             $statement = $DB->prepare("INSERT INTO mascota (nombre,comentarios,edad,categoria,tipo,foto,estado,sexo,cuidador) values(?, ?, ?, ?, ?, ?, ?, ?, ?)");
             $statement->execute(array($nombre,$descripcion,$edad,$categoria,$tipo,$foto,$estado,$sexo,$cuidador));
-            header("Location: admin-catalogo.php");
+            header("Location: cuidador-catalogo.php");
         }
     }
 
@@ -126,7 +121,7 @@ $nombreError = $descripcionError = $edadError = $categoriaError = $tipoError = $
                          <label> Datos. </label>
                     </div>
                     <br>
-                    <form class="form" action="agregar-mascota.php" role="form" method="post" enctype="multipart/form-data">
+                    <form class="form" action="agregar-mascota-cuidador.php" role="form" method="post" enctype="multipart/form-data">
                         <div class="form-group">
                             <label for="name">Nombre: </label>
                             <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Nombre" value="<?php echo $nombre;?>">
@@ -174,19 +169,6 @@ $nombreError = $descripcionError = $edadError = $categoriaError = $tipoError = $
                         </div>
 
                         <div class="form-group">
-                            <label for="cuidador">Cuidador: </label>
-                            <select class="form-control" id="cuidador" name="cuidador">
-                            <?php
-                               foreach ($DB->query("SELECT cuidador.idCuidador AS idCui, usuario.nombre AS nameUser FROM cuidador JOIN usuario ON cuidador.idUsuario = usuario.idUsuario") as $row) 
-                               {
-                                    echo '<option value="'. $row['idCui'] .'">'. $row['nameUser'] . '</option>';;
-                               }
-                            ?>
-                            </select>
-                            <span class="help-inline"><?php echo $cuidadorError;?></span>
-                        </div>
-
-                        <div class="form-group">
                             <label for="image">Selecciona una imagen:</label>
                             <input type="file" id="image" name="image"> 
                             <span class="help-inline"><?php echo $fotoError;?></span>
@@ -194,7 +176,7 @@ $nombreError = $descripcionError = $edadError = $categoriaError = $tipoError = $
                         <br>
                         <div class="form-actions">
                             <button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-pencil"></span> Agregar</button>
-                            <a class="btn btn-primary" href="admin-catalogo.php"><span class="glyphicon glyphicon-arrow-left"></span> Regresar</a>
+                            <a class="btn btn-primary" href="cuidador-catalogo.php"><span class="glyphicon glyphicon-arrow-left"></span> Regresar</a>
                        </div>
                     </form>
                 </div>

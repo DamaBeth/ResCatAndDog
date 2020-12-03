@@ -2,7 +2,8 @@
 
 require("libs/config.php");
 $pageDetails = getPageDetailsByName($currentPage);
-$idTipoUser = '1'; /*id del tipo de usuario 1:admin, 2:cuidador, 3:adoptante, 4:visitante*/
+$idUserCuidador = "1"; /*id del cuidador que está logueado*/
+$idTipoUser = "2" /*id del tipo de usuario 1:admin, 2:cuidador, 3:adoptante, 4:visitante*/
 ?>
 <!DOCTYPE html>
 <html>
@@ -22,7 +23,7 @@ $idTipoUser = '1'; /*id del tipo de usuario 1:admin, 2:cuidador, 3:adoptante, 4:
         <div class="container admin">
             <div class="row">
                 <div class="detalles">
-                    <label>Lista de mascotas </label>  <a href="agregar-mascota.php" class="btn btn-success btn-lg"><span class="glyphicon glyphicon-plus"></span>Agregar una mascota</a></h1>
+                    <label>Lista de mascotas </label>  <a href="agregar-mascota-cuidador.php" class="btn btn-success btn-lg"><span class="glyphicon glyphicon-plus"></span>Agregar una mascota</a></h1>
                 </div>
                 <table class="table table-striped table-bordered">
                   <thead>
@@ -31,14 +32,13 @@ $idTipoUser = '1'; /*id del tipo de usuario 1:admin, 2:cuidador, 3:adoptante, 4:
                       <th>Descripción</th>
                       <th>Raza</th>
                       <th>Categoría</th>
-                      <th>Cuidador</th>
                       <th>Acciones</th>
                     </tr>
                   </thead>
                   <tbody>
                       <?php
-                        /*$statement = $DB->query("SELECT mascota.idMascota, mascota.nombre, mascota.comentarios, mascota.tipo, categorias.name AS categoria FROM mascota LEFT JOIN categorias ON mascota.categoria = categorias.id WHERE mascota.estado = 'activo' ORDER BY mascota.idMascota DESC");*/
-                        $statement = $DB->query("SELECT mascota.idMascota, mascota.nombre, mascota.comentarios, mascota.tipo, categorias.name AS categoria, usuario.nombre AS nameUser, usuario.telefono AS telUser FROM mascota LEFT JOIN categorias ON mascota.categoria = categorias.id JOIN cuidador ON mascota.cuidador = cuidador.idCuidador JOIN usuario ON cuidador.idUsuario = usuario.idUsuario WHERE mascota.estado = 'activo' ORDER BY mascota.idMascota DESC");
+                        $statement = $DB->prepare("SELECT mascota.idMascota, mascota.nombre, mascota.comentarios, mascota.tipo, categorias.name AS categoria, usuario.nombre AS nameUser, usuario.telefono AS telUser FROM mascota LEFT JOIN categorias ON mascota.categoria = categorias.id JOIN cuidador ON mascota.cuidador = cuidador.idCuidador JOIN usuario ON cuidador.idUsuario = usuario.idUsuario WHERE mascota.estado = 'activo' AND mascota.cuidador = ? ORDER BY mascota.idMascota DESC");
+                        $statement->execute(array($idUserCuidador));
                         while($mascota = $statement->fetch()) 
                         {
                             echo '<tr>';
@@ -46,7 +46,6 @@ $idTipoUser = '1'; /*id del tipo de usuario 1:admin, 2:cuidador, 3:adoptante, 4:
                             echo '<td>'. $mascota['comentarios'] . '</td>';
                             echo '<td>'. $mascota['tipo'] . '</td>';
                             echo '<td>'. $mascota['categoria'] . '</td>';
-                            echo '<td>'. $mascota['nameUser'] . '</td>';
                             echo '<td width=300>';
                             echo '<a class="btn btn-default" href="ver-mascota.php?id='.$mascota['idMascota'].'&idTipoUser='.$idTipoUser.'"><span class="glyphicon glyphicon-eye-open"></span> Ver</a>';
                             echo ' ';
