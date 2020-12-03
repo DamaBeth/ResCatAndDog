@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 03-12-2020 a las 02:09:38
+-- Tiempo de generación: 03-12-2020 a las 02:28:52
 -- Versión del servidor: 10.4.16-MariaDB
 -- Versión de PHP: 7.4.12
 
@@ -20,10 +20,40 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `php_web`
 --
+DROP DATABASE IF EXISTS `php_web`;
 CREATE DATABASE IF NOT EXISTS `php_web` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
 USE `php_web`;
 
 -- --------------------------------------------------------
+--
+-- Estructura de tabla para la tabla `usuario`
+--
+DROP TABLE IF EXISTS `usuario`;
+CREATE TABLE `usuario` (
+  `idUsuario` int(11) NOT NULL,
+  `nombre` varchar(70) NOT NULL,
+  `calle` varchar(70) NOT NULL,
+  `colonia` varchar(50) NOT NULL,
+  `estado` varchar(30) NOT NULL,
+  `noExterior` varchar(10) NOT NULL,
+  `noInterior` varchar(10) DEFAULT NULL,
+  `correo` varchar(50) NOT NULL,
+  `password` varchar(50) NOT NULL,
+  `telefono` varchar(13) NOT NULL,
+  `username` varchar(25) NOT NULL,
+  `tipo` enum('A','B','C') NOT NULL DEFAULT 'B'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `usuario`
+--
+
+INSERT INTO `usuario` (`idUsuario`, `nombre`, `calle`, `colonia`, `estado`, `noExterior`, `noInterior`, `correo`, `password`, `telefono`, `username`,`tipo`) VALUES
+(1, 'Ariel', 'Amapolas', 'Centro', 'Puebla', '94A', NULL, 'ariB@hotmail.com', '123456', '2446882172', 'AriB','B'),
+(2, 'Rodrigo', 'Fresas', 'Analco', 'Puebla', '10A', NULL, 'rodri@hotmail.com', '1234', '2461264152', 'ricardo','C'),
+(3, 'Alejandro', 'Av. 5 de mayo', 'Centro', 'Puebla', '101', NULL, 'alex@hotmail.com', '1234', '22247896512', 'alejandro','B'),
+(4, 'Lluvia Naomy Carmona Avewndaño', 'Hidalgo', 'Centro', 'Tlaxcala', '513', 's/N', 'lluvia_naomy@hotmail.com', '12345', '+522411107411', 'NaomySinHYConY','A'),
+(5, 'Damaris Lizbeth Quiroz Cuautle','Av. del Prado','Valle Real','Puebla','94A',NULL,'owl_dmth@hotmail.com','uwu','26565362','Dama','A');
 
 --
 -- Estructura de tabla para la tabla `adoptante`
@@ -133,7 +163,8 @@ INSERT INTO `mascota` (`idMascota`, `comentarios`, `edad`, `foto`, `tipo`, `nomb
 (20, 'Hámster pequeño, pero muy travieso...', 14, 'huronChocolate.png', 'Hurón Chocolate', 'Zuri', 'Hembra', 5, 'activo', 2),
 (21, 'Loro exótico, sabe imitar varios sonidos', 42, 'loroArcoiris.png', 'Loro Acoíris', 'Harry', 'Macho', 6, 'activo', 1),
 (22, 'Loro de diferentes colores, le gusta imitar canciones', 54, 'loroCariamarillo.png', 'Loro Cariamarillo', 'Lady', 'Hembra', 6, 'activo', 1),
-(23, 'Sabe imitar algunas frases en español e inglés', 34, 'loroGris.png', 'Loro Gris', 'Osiris', 'Macho', 6, 'activo', 2);
+(23, 'Sabe imitar algunas frases en español e inglés', 34, 'loroGris.png', 'Loro Gris', 'Osiris', 'Macho', 6, 'activo', 2),
+(24, 'Pequeño hámster, juguetón y travieso', 4, 'hamsterPanda.png', 'Hásmter Panda', 'Ulises', 'Macho', 4, 'activo', 2);
 
 -- --------------------------------------------------------
 
@@ -220,36 +251,6 @@ INSERT INTO `solicitud` (`idSolicitud`, `comentarios`, `fecha`, `idCuidador`, `i
 
 -- --------------------------------------------------------
 
---
--- Estructura de tabla para la tabla `usuario`
---
-
-DROP TABLE IF EXISTS `usuario`;
-CREATE TABLE `usuario` (
-  `idUsuario` int(11) NOT NULL,
-  `nombre` varchar(70) NOT NULL,
-  `calle` varchar(70) NOT NULL,
-  `colonia` varchar(50) NOT NULL,
-  `estado` varchar(30) NOT NULL,
-  `noExterior` varchar(10) NOT NULL,
-  `noInterior` varchar(10) DEFAULT NULL,
-  `correo` varchar(50) NOT NULL,
-  `password` varchar(50) NOT NULL,
-  `telefono` varchar(13) NOT NULL,
-  `username` varchar(25) NOT NULL,
-  `tipo` enum('A','B','C') NOT NULL DEFAULT 'B'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Volcado de datos para la tabla `usuario`
---
-
-INSERT INTO `usuario` (`idUsuario`, `nombre`, `calle`, `colonia`, `estado`, `noExterior`, `noInterior`, `correo`, `password`, `telefono`, `username`,`tipo`) VALUES
-(1, 'Ariel', 'Amapolas', 'Centro', 'Puebla', '94A', NULL, 'ariB@hotmail.com', '123456', '2446882172', 'AriB','B'),
-(2, 'Rodrigo', 'Fresas', 'Analco', 'Puebla', '10A', NULL, 'rodri@hotmail.com', '1234', '2461264152', 'ricardo','C'),
-(3, 'Alejandro', 'Av. 5 de mayo', 'Centro', 'Puebla', '101', NULL, 'alex@hotmail.com', '1234', '22247896512', 'alejandro','B'),
-(4, 'Lluvia Naomy Carmona Avewndaño', 'Hidalgo', 'Centro', 'Tlaxcala', '513', 's/N', 'lluvia_naomy@hotmail.com', '12345', '+522411107411', 'NaomySinHYConY','A'),
-(5, 'Damaris Lizbeth Quiroz Cuautle','Av. del Prado','Valle Real','Puebla','94A',NULL,'owl_dmth@hotmail.com','uwu','26565362','Dama','A');
 
 --
 -- Índices para tablas volcadas
@@ -319,13 +320,13 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT de la tabla `adoptante`
 --
 ALTER TABLE `adoptante`
-  MODIFY `idAdoptante` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idAdoptante` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `categorias`
 --
 ALTER TABLE `categorias`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de la tabla `cuidador`
@@ -337,13 +338,13 @@ ALTER TABLE `cuidador`
 -- AUTO_INCREMENT de la tabla `mascota`
 --
 ALTER TABLE `mascota`
-  MODIFY `idMascota` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `idMascota` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT de la tabla `mp_pages`
 --
 ALTER TABLE `mp_pages`
-  MODIFY `page_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `page_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT de la tabla `mp_tagline`
@@ -355,7 +356,7 @@ ALTER TABLE `mp_tagline`
 -- AUTO_INCREMENT de la tabla `solicitud`
 --
 ALTER TABLE `solicitud`
-  MODIFY `idSolicitud` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idSolicitud` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `usuario`
