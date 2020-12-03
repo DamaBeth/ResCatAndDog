@@ -137,6 +137,16 @@ try {
     }
 </script>
 -->
+<style>
+.rows{ width:100%; height:auto; overflow:hidden; margin-bottom:10px; }
+.label{ width:100px;color:#000; float:left;padding-top:5px;}
+.input-row{ width:280px; height:32px; background-color:#FFF; float:left; position:relative; }
+.textbox{ width:100%; height:24px;  border:1px solid #007294;outline:none; background:transparent; color:#000; padding:0px;  }
+.textarea{ width:100%; height:57px;  border:1px solid #007294; outline:none; background:transparent; color:#000; padding:0px;  }
+.submit_button{background:#118eb1;padding:5px;border:none;cursor:pointer;}
+.success{padding-bottom:30px; color:#009900;}
+.error{padding-bottom:30px; color:#F00;}
+</style>
 <?php echo $msg; ?>
 <div class="formField">      
     <form method="post" action="" name="users">
@@ -181,7 +191,7 @@ try {
             </tr>
             <tr>
                 <td class="formLeft"><span class="required">*</span>Contraseña: </td>
-                <td><input type="text" name="password" id="password" class="textboxes" value="<?php echo stripslashes($details[0]["password"]); ?>" autocomplete="off"  onkeyup="changeAlias();"  /> </td>
+                <td><input type="password" name="password" id="password" class="textboxes" value="<?php echo stripslashes($details[0]["password"]); ?>" autocomplete="off"  onkeyup="changeAlias();"  /> </td>
             </tr>
             <tr>
                 <td class="formLeft"><span class="required">*</span>Seleccione la función que desea desempeñar: </td>

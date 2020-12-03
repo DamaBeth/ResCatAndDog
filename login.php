@@ -109,7 +109,7 @@ function validateForm() {
         
         <div class="rows">
 			<div class="label"><span style="color:#F00;">*</span>Contraseña: </div>
-			<div class="input-row" ><input name="password" id="password" type="text" class="textbox" autocomplete="off"></div>
+			<div class="input-row" ><input name="password" id="password" type="password" class="textbox" autocomplete="off"></div>
 		</div>
         
          <div class="rows">
