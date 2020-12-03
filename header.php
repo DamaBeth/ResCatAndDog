@@ -30,8 +30,7 @@
                                 <a href="about-us.php" <?php echo ($currentPage == "about-us") ? ' class="current-page-item"' : '' ?> >Nosotros</a>
                                 <a href="signin.php" <?php echo ($currentPage == "signin") ? ' class="current-page-item"' : '' ?> >Registrarse</a>
                                 <a href="login.php" <?php echo ($currentPage == "login") ? ' class="current-page-item"' : '' ?>>Iniciar sesión</a>
-                                
-                                <a href="manage-site" target="_blank">Adm-Quitaralfinal</a>
+                               
                             </nav>
                         </header>
 

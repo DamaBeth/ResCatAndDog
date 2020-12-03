@@ -17,12 +17,13 @@ if (isset($_POST["sub"])) {
     $estado     = db_prepare_input($_POST["estado"]);
     $noExterior = db_prepare_input($_POST["noExterior"]);
     $noInterior = db_prepare_input($_POST["noInterior"]);
+    $tipo       = db_prepare_input($_POST["tipo"]);
 
     $status = ($status <> "") ? $status : "I";
 
     if($nombre <> ""  && $correo <> "" && $password <> "" && $username <> ""){
-            $sqlUS = "INSERT INTO " . TABLE_USUARIO . " (`nombre`,`calle`, `colonia`, `estado`, `noExterior`, `noInterior`, `correo`, `password`, `telefono`, `username`) VALUES 
-                (:pt, :ca, :col, :es, :nex, :nint, :correo, :pdsc, :mkey, :mdesc)";
+            $sqlUS = "INSERT INTO " . TABLE_USUARIO . " (`nombre`,`calle`, `colonia`, `estado`, `noExterior`, `noInterior`, `correo`, `password`, `telefono`, `username`, `tipo`) VALUES 
+                (:pt, :ca, :col, :es, :nex, :nint, :correo, :pdsc, :mkey, :mdesc, :tipo)";
             
                 try {
                     $stmt = $DB->prepare($sqlUS);
@@ -36,7 +37,7 @@ if (isset($_POST["sub"])) {
                     $stmt->bindValue(":pdsc", $password);
                     $stmt->bindValue(":mkey", $telefono);
                     $stmt->bindValue(":mdesc", $username);
-    
+                    $stmt->bindValue(":tipo", $tipo);
                    
                     $stmt->execute();
                     if ($stmt->rowCount() > 0) {
@@ -53,35 +54,18 @@ if (isset($_POST["sub"])) {
         $msg = errorMessage("Todos los campos son obligatorios");
     }
 }
-/*
-if (isset($_GET["edit"]) && $_GET["edit"] != "") {
-    $pageTitle = "Editar usuario";
-
-    try {
-        $stmt = $DB->prepare("SELECT * FROM " . TABLE_USUARIO . " WHERE `idUsuario` = :pid");
-        $stmt->bindValue(":pid", intval(db_prepare_input($_GET["edit"])));
-        $stmt->execute();
-        $details = $stmt->fetchAll();
-    } catch (Exception $ex) {
-        echo errorMessage($ex->getMessage());
-    }
-} else {
-    $pageTitle = "Agregar usuario";
-}
-*/
-
 
 include("header.php");
 ?>
 
 <style>
-.rows{ width:100%; height:auto; overflow:hidden; margin-bottom:10px; }
-.label{ width:100px;color:#000; float:left;padding-top:5px;}
+.rows{ width:100%; height:auto; overflow:hidden; margin-bottom:10px; margin-right:30px; padding-left:30px;}
+.label{ width:100px;color:#000; float:left;padding:3px; margin-bottom:10px; margin-right:30px; padding-left:30px;}
 .input-row{ width:280px; height:32px; background-color:#FFF; float:left; position:relative; }
 .input-textarea-row{ width:280px; height:65px; background-color:#FFF; float:left; position:relative; }
-.textbox{ width:100%; height:24px;  border:1px solid #007294;outline:none; background:transparent; color:#000; padding:0px;  }
+.textbox{ width:100%; height:24px;  border:2px solid #007294;outline:none; background:transparent; color:#000; padding:0px;  }
 .textarea{ width:100%; height:57px;  border:1px solid #007294; outline:none; background:transparent; color:#000; padding:0px;  }
-.submit_button{background:#118eb1;padding:2px;border:none;cursor:pointer;}
+.submit_button{background:#118eb1;padding:8px;border:none;cursor:pointer;position:left;}
 .success{padding-bottom:30px; color:#009900;}
 .error{padding-bottom:30px; color:#F00;}
 </style>
@@ -89,7 +73,7 @@ include("header.php");
 <div class="row main-row">
     <div class="9u">
         <section class="left-content">
-            <h2><?php echo stripslashes($pageDetails["page_title"]); ?></h2>
+            <h1><?php echo stripslashes($pageDetails["page_title"]); ?></h1>
             <?php echo stripslashes($pageDetails["page_desc"]); ?>
         </section>
 
@@ -103,7 +87,7 @@ include("header.php");
                     <div class="label"><span style="color:#F00;">*</span>Nombre completo: </div>
                     <div class="input-row" ><input name="nombre" id="nombre" type="text" class="textbox" autocomplete="off"></div>
                 </div>
-
+                
                 <div class="rows">
                     <div class="label"><span style="color:#F00;">*</span>Telefono: </div>
                     <div class="input-row" ><input name="telefono" id="telefono" type="text" class="textbox" autocomplete="off"></div>
@@ -149,6 +133,12 @@ include("header.php");
                 <div class="rows">
                     <div class="label"><span style="color:#F00;">*</span>Contraseña: </div>
                     <div class="input-row" ><input name="password" id="password" type="text" class="textbox" autocomplete="off"></div>
+                </div>
+
+                <div class="rows">
+                    <div class="label"><span style="color:#F00;">*</span>Seleccione el tipo de función que desea desempeñar: </div>
+                        <label><input type="radio" name="tipo" value="B" checked  />Adoptante</label> &nbsp; 
+                        <label><input type="radio" name="tipo" value="C"  />Organización u colaborador</label>
                 </div>
                 
                 <div class="rows">

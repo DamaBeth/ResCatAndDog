@@ -208,18 +208,20 @@ CREATE TABLE `usuario` (
   `correo` varchar(50) NOT NULL,
   `password` varchar(50) NOT NULL,
   `telefono` varchar(13) NOT NULL,
-  `username` varchar(25) NOT NULL
+  `username` varchar(25) NOT NULL,
+  `tipo` enum('A','B','C') NOT NULL DEFAULT 'B'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `usuario`
 --
 
-INSERT INTO `usuario` (`idUsuario`, `nombre`, `calle`, `colonia`, `estado`, `noExterior`, `noInterior`, `correo`, `password`, `telefono`, `username`) VALUES
-(1, 'Ariel', 'Amapolas', 'Centro', 'Puebla', '94A', NULL, 'ariB@hotmail.com', '123456', '2446882172', 'AriB'),
-(2, 'Rodrigo', 'Fresas', 'Analco', 'Puebla', '10A', NULL, 'rodri@hotmail.com', '1234', '2461264152', 'ricardo'),
-(3, 'Alejandro', 'Av. 5 de mayo', 'Centro', 'Puebla', '101', NULL, 'alex@hotmail.com', '1234', '22247896512', 'alejandro'),
-(4, 'Lluvia Naomy Carmona Avewndaño', 'Hidalgo', 'Centro', 'Tlaxcala', '513', 's/N', 'lluvia_naomy@hotmail.com', '12345', '+522411107411', 'NaomySinHYConY');
+INSERT INTO `usuario` (`idUsuario`, `nombre`, `calle`, `colonia`, `estado`, `noExterior`, `noInterior`, `correo`, `password`, `telefono`, `username`,`tipo`) VALUES
+(1, 'Ariel', 'Amapolas', 'Centro', 'Puebla', '94A', NULL, 'ariB@hotmail.com', '123456', '2446882172', 'AriB','B'),
+(2, 'Rodrigo', 'Fresas', 'Analco', 'Puebla', '10A', NULL, 'rodri@hotmail.com', '1234', '2461264152', 'ricardo','C'),
+(3, 'Alejandro', 'Av. 5 de mayo', 'Centro', 'Puebla', '101', NULL, 'alex@hotmail.com', '1234', '22247896512', 'alejandro','B'),
+(4, 'Lluvia Naomy Carmona Avewndaño', 'Hidalgo', 'Centro', 'Tlaxcala', '513', 's/N', 'lluvia_naomy@hotmail.com', '12345', '+522411107411', 'NaomySinHYConY','A'),
+(5, 'Damaris Lizbeth Quiroz Cuautle','Av. del Prado','Valle Real','Puebla','94A',NULL,'owl_dmth@hotmail.com','uwu','26565362','Dama','A');
 
 --
 -- Índices para tablas volcadas

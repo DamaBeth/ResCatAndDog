@@ -11,8 +11,8 @@ if (isset($_POST["sbtn"])) {
 		//$sql = "SELECT `idUsuario`, `nombre` from " . TABLE_USUARIO .  "where `correo` = :correo and  `password` = :pass ";
 
 
-		$sql = " select idUsuario, nombre from usuario where correo= :correo and password= :pass ;";
-        
+		//$sql = " select idUsuario, nombre, tipo from usuario where correo= :correo and password= :pass ;";
+        $sql = " select tipo from usuario where correo= :correo and password= :pass ;";
 		try{
 			$stmt = $DB->prepare($sql);
 			$stmt->bindValue(":correo", $correo);
@@ -21,8 +21,17 @@ if (isset($_POST["sbtn"])) {
 			$stmt->execute();
 
 			if ($stmt->rowCount() > 0) {
-				//simple_redirect("login.php?msg=success");
-				simple_redirect("index.php");
+				$details = $stmt->fetchAll();
+				$tipo = stripslashes($details[0]["tipo"]);
+
+				if($tipo == 'A'){
+					simple_redirect("index.php?msg=A");
+				}else if($tipo == 'B'){
+					simple_redirect("index.php?msg=B");
+				}else if($tipo == 'C'){
+					simple_redirect("index.php?msg=C");
+				}
+				
 			} else if ($stmt->rowCount() == 0) {
 				simple_redirect("login.php?msg=error");
 			} else {
@@ -45,7 +54,7 @@ include("header.php");
 .input-row{ width:280px; height:32px; background-color:#FFF; float:left; position:relative; }
 .textbox{ width:100%; height:24px;  border:1px solid #007294;outline:none; background:transparent; color:#000; padding:0px;  }
 .textarea{ width:100%; height:57px;  border:1px solid #007294; outline:none; background:transparent; color:#000; padding:0px;  }
-.submit_button{background:#118eb1;padding:2px;border:none;cursor:pointer;}
+.submit_button{background:#118eb1;padding:5px;border:none;cursor:pointer;}
 .success{padding-bottom:30px; color:#009900;}
 .error{padding-bottom:30px; color:#F00;}
 </style>
@@ -113,12 +122,17 @@ function validateForm() {
         
       </form>
     </section>
+
+	<div >
+	<!--sidebar starts-->
+		<?php
+		include("sidebar.php");
+		?>
+	<!--sidebar ends-->
+	</div>
   </div>
-  <!--sidebar starts-->
-  <?php
-	include("sidebar.php");
-	?>
-  <!--sidebar ends-->
+  
+  
 </div>
 <?php
 include("footer.php");
