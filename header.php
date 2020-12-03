@@ -31,7 +31,7 @@
                                 <a href="signin.php" <?php echo ($currentPage == "signin") ? ' class="current-page-item"' : '' ?> >Registrarse</a>
                                 <a href="login.php" <?php echo ($currentPage == "login") ? ' class="current-page-item"' : '' ?>>Iniciar sesión</a>
                                 
-                                <a href="manage-site" target="_blank">Adm-Quitaralfinal</a>
+                                <!-- <a href="manage-site" target="_blank">Adm-Quitaralfinal</a> -->
                             </nav>
                         </header>
 
@@ -147,6 +147,40 @@
                     <div class="row">
                         <div class="12u">
                             <div id="bannerLI">
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <?php } 
+        ?>
+
+        <?php
+        if ($currentPage == "creaSolicitud") {
+            ?>
+            <div id="banner-wrapper">
+                <div class="container">
+                    <div class="row">
+                        <div class="12u">
+                            <div id="bannerNS">
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <?php } 
+        ?>
+
+        <?php
+        if ($currentPage == "verSolicitudes") {
+            ?>
+            <div id="banner-wrapper">
+                <div class="container">
+                    <div class="row">
+                        <div class="12u">
+                            <div id="bannerVS">
                             </div>
 
                         </div>

@@ -211,6 +211,31 @@
 		background-size: 263px 42px;
 	}
 
+	#bannerNS {
+		position: relative;
+		width: 1160px;
+		height: 265px;
+		margin: 2% 0 2% 0;
+		box-shadow: 0px 2px 4px 0px rgba(0,0,0,0.10);
+		border-radius: 10px;
+		padding: 20px;
+		background: #fff url(images/solicitud.jpg) no-repeat 20px 20px;
+		background-size: 1160px 265px;
+	}
+
+	#bannerVS {
+		position: relative;
+		width: 1160px;
+		height: 265px;
+		margin: 2% 0 2% 0;
+		box-shadow: 0px 2px 4px 0px rgba(0,0,0,0.10);
+		border-radius: 10px;
+		padding: 20px;
+		background: #fff url(images/solicitudes.jpg) no-repeat 20px 20px;
+		background-size: 1160px 265px;
+	}
+
+	
 		#banner h2 {
 			position: absolute;
 			z-index: 1;

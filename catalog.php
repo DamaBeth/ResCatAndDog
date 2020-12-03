@@ -63,7 +63,7 @@ include("header.php");
                                                         <h4>' . $mascota['tipo'] . '</h4>
                                                         <p>' . $mascota['comentarios'] . '</p>
                                                         <div class="left-contentCatag">
-                                                            <a href="#" class="btn btn-adoptar" role="button"> Adoptar</a>
+                                                            <a href="creaSolicitud.php?idM='.$mascota['idMascota'].'" class="btn btn-adoptar" role="button"> Adoptar</a>
                                                         </div>
                                                         <div class="left-contentCatag">
                                                             <a href="ver-mascota.php?id='.$mascota['idMascota'].'" class="btn btn-info" role="button"> Ver</a>
@@ -86,10 +86,10 @@ include("header.php");
                                                     <h4>' . $mascota['tipo'] . '</h4>
                                                     <p>' . $mascota['comentarios'] . '</p>
                                                     <div class="left-contentCatag">
-                                                            <a href="#" class="btn btn-adoptar" role="button"> Adoptar</a>
+                                                            <a href="creaSolicitud.php?id='.$mascota['idMascota'].'" class="btn btn-adoptar" role="button"> Adoptar</a>
                                                         </div>
                                                         <div class="left-contentCatag">
-                                                            <a href="ver-mascota.php?id='.$mascota['idMascota'].'" class="btn btn-info" role="button"> Ver</a>
+                                                            <a href="ver-mascota.php?idM='.$mascota['idMascota'].'" class="btn btn-info" role="button"> Ver</a>
                                                     </div> 
                                                 </div>
                                             </div>

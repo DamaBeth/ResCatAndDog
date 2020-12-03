@@ -45,7 +45,8 @@ include("header.php");
 .input-row{ width:280px; height:32px; background-color:#FFF; float:left; position:relative; }
 .textbox{ width:100%; height:24px;  border:1px solid #007294;outline:none; background:transparent; color:#000; padding:0px;  }
 .textarea{ width:100%; height:57px;  border:1px solid #007294; outline:none; background:transparent; color:#000; padding:0px;  }
-.submit_button{background:#118eb1;padding:2px;border:none;cursor:pointer;}
+.submit_button{background:#118eb1;padding:15px;border:10px;cursor:pointer;}
+.submit_button:hover{background:#007294;padding:15px;border:10px;cursor:pointer;}
 .success{padding-bottom:30px; color:#009900;}
 .error{padding-bottom:30px; color:#F00;}
 </style>
@@ -84,7 +85,9 @@ function validateForm() {
     <section class="left-content">
      <h2><?php echo stripslashes($pageDetails["page_title"]); ?></h2>
             <?php echo stripslashes($pageDetails["page_desc"]); ?>
+	</section>
 
+	<section>
       <div style="height:30px;clear:both"></div>
       <?php if ($_GET["msg"] == "success") { ?>
       <div class="success">Imaginemos que ya ingresaste :)</div>
@@ -107,18 +110,19 @@ function validateForm() {
          <div class="label"></div>
          <input type="submit" value="Entrar" name="sbtn" class="submit_button" />
          </div>
-
-        
-        
-        
       </form>
     </section>
   </div>
-  <!--sidebar starts-->
+  <section class="right-content">
+  	<div class="rows">
+	  <!--sidebar starts-->
   <?php
 	include("sidebar.php");
 	?>
   <!--sidebar ends-->
+  	</div>
+  </section>
+  
 </div>
 <?php
 include("footer.php");

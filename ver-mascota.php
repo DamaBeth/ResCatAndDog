@@ -6,6 +6,7 @@ if(!empty($_GET['id']))
     {
         $id = checkInput($_GET['id']);
     }
+    
     $statement = $DB->prepare("SELECT mascota.idMascota, mascota.nombre, mascota.comentarios, mascota.edad, mascota.foto, mascota.tipo, categorias.name AS categoria FROM mascota LEFT JOIN categorias ON mascota.categoria = categorias.id WHERE mascota.idMascota = ?");
     $statement->execute(array($id));
     $mascota = $statement->fetch();
@@ -70,7 +71,8 @@ include("header.php");
                           <div class="caption">
                             <h4><?php echo $mascota['tipo'];?></h4>
                             <p><?php echo $mascota['comentarios'];?></p>
-                            <a href="#" class="btn btn-adoptar" role="button"> Adoptar</a>
+                            <!-- Arreglar el envío de id de Mascota desde aquí -->
+                            <a href="creaSolicitud.php?idM=" class="btn btn-adoptar" role="button"> Adoptar</a>
                           </div>
                     </div>
                 </div>
