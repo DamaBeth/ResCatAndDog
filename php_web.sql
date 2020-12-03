@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 03-12-2020 a las 02:04:14
+-- Tiempo de generación: 03-12-2020 a las 02:09:38
 -- Versión del servidor: 10.4.16-MariaDB
 -- Versión de PHP: 7.4.12
 
@@ -34,6 +34,13 @@ CREATE TABLE `adoptante` (
   `idAdoptante` int(11) NOT NULL,
   `idUsuario` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `adoptante`
+--
+
+INSERT INTO `adoptante` (`idAdoptante`, `idUsuario`) VALUES
+(1, 4);
 
 -- --------------------------------------------------------
 
@@ -198,11 +205,18 @@ DROP TABLE IF EXISTS `solicitud`;
 CREATE TABLE `solicitud` (
   `idSolicitud` int(11) NOT NULL,
   `comentarios` varchar(500) NOT NULL,
-  `fecha` date NOT NULL,
+  `fecha` datetime NOT NULL DEFAULT current_timestamp(),
   `idCuidador` int(11) NOT NULL,
   `idAdoptante` int(11) NOT NULL,
   `idMascota` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `solicitud`
+--
+
+INSERT INTO `solicitud` (`idSolicitud`, `comentarios`, `fecha`, `idCuidador`, `idAdoptante`, `idMascota`) VALUES
+(1, 'Me gustaría adoptar esta huellita ', '2020-12-02 19:08:56', 1, 1, 3);
 
 -- --------------------------------------------------------
 
@@ -232,7 +246,8 @@ CREATE TABLE `usuario` (
 INSERT INTO `usuario` (`idUsuario`, `nombre`, `calle`, `colonia`, `estado`, `noExterior`, `noInterior`, `correo`, `password`, `telefono`, `username`) VALUES
 (1, 'Ariel', 'Amapolas', 'Centro', 'Puebla', '94A', NULL, 'ariB@hotmail.com', '123456', '2446882172', 'AriB'),
 (2, 'Rodrigo', 'Fresas', 'Analco', 'Puebla', '10A', NULL, 'rodri@hotmail.com', '1234', '2461264152', 'ricardo'),
-(3, 'Alejandro', 'Av. 5 de mayo', 'Centro', 'Puebla', '101', NULL, 'alex@hotmail.com', '1234', '22247896512', 'alejandro');
+(3, 'Alejandro', 'Av. 5 de mayo', 'Centro', 'Puebla', '101', NULL, 'alex@hotmail.com', '1234', '22247896512', 'alejandro'),
+(4, 'Lluvia Naomy Carmona', 'Hidalgo', 'Centro', 'Tlaxcala', '453', '1', 'lluvia@hotmail.com', '12345', '2411107411', 'Naomy');
 
 --
 -- Índices para tablas volcadas
@@ -302,7 +317,7 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT de la tabla `adoptante`
 --
 ALTER TABLE `adoptante`
-  MODIFY `idAdoptante` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idAdoptante` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `categorias`
@@ -338,13 +353,13 @@ ALTER TABLE `mp_tagline`
 -- AUTO_INCREMENT de la tabla `solicitud`
 --
 ALTER TABLE `solicitud`
-  MODIFY `idSolicitud` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idSolicitud` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `idUsuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `idUsuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- Restricciones para tablas volcadas
