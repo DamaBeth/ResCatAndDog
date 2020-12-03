@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
- <link rel="icon" href="http://thesoftwareguy.in/favicon.ico" type="image/x-icon" />
-<title>Admin Area - Simple Website - www.baulphp.com</title>
+<title>Área de administración</title>
+<link rel="icon" href="favicon.ico" type="image/x-icon" />
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
 <body>

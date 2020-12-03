@@ -3,7 +3,17 @@
 require("libs/config.php");
 $pageDetails = getPageDetailsByName($currentPage);
 
-include("header.php");
+
+if ($_GET["msg"] == "A") { 
+    include("headerA.php");
+}else if ($_GET["msg"] == "B") {  
+    include("headerB.php");
+}else if($_GET["msg"] == "C"){
+    include("headerB.php");
+}else{
+    include("header.php");
+}
+
 ?>
 <div class="row main-row">
     <div class="9u">

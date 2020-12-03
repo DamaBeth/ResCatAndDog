@@ -11,8 +11,8 @@ if (isset($_POST["sbtn"])) {
 		//$sql = "SELECT `idUsuario`, `nombre` from " . TABLE_USUARIO .  "where `correo` = :correo and  `password` = :pass ";
 
 
-		$sql = " select idUsuario, nombre from usuario where correo= :correo and password= :pass ;";
-        
+		//$sql = " select idUsuario, nombre, tipo from usuario where correo= :correo and password= :pass ;";
+        $sql = " select tipo from usuario where correo= :correo and password= :pass ;";
 		try{
 			$stmt = $DB->prepare($sql);
 			$stmt->bindValue(":correo", $correo);
@@ -21,8 +21,17 @@ if (isset($_POST["sbtn"])) {
 			$stmt->execute();
 
 			if ($stmt->rowCount() > 0) {
-				//simple_redirect("login.php?msg=success");
-				simple_redirect("index.php");
+				$details = $stmt->fetchAll();
+				$tipo = stripslashes($details[0]["tipo"]);
+
+				if($tipo == 'A'){
+					simple_redirect("index.php?msg=A");
+				}else if($tipo == 'B'){
+					simple_redirect("index.php?msg=B");
+				}else if($tipo == 'C'){
+					simple_redirect("index.php?msg=C");
+				}
+				
 			} else if ($stmt->rowCount() == 0) {
 				simple_redirect("login.php?msg=error");
 			} else {
@@ -112,16 +121,16 @@ function validateForm() {
          </div>
       </form>
     </section>
-  </div>
-  <section class="right-content">
-  	<div class="rows">
-	  <!--sidebar starts-->
-  <?php
-	include("sidebar.php");
-	?>
-  <!--sidebar ends-->
-  	</div>
-  </section>
+
+	<section class="right-content">
+	<div >
+	<!--sidebar starts-->
+		<?php
+		include("sidebar.php");
+		?>
+	<!--sidebar ends-->
+	</div>
+	</section>
   
 </div>
 <?php

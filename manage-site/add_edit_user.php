@@ -16,9 +16,10 @@ if (isset($_POST["sub"])) {
     $estado     = db_prepare_input($_POST["estado"]);
     $noExterior = db_prepare_input($_POST["noExterior"]);
     $noInterior = db_prepare_input($_POST["noInterior"]);
+    $tipo       = db_prepare_input($_POST["tipo"]);
     $idUsuario  = db_prepare_input($_POST["idUsuario"]);
 
-    $status = ($status <> "") ? $status : "I";
+    $tipo = ($tipo <> "") ? $tipo : "B";
 
     if ($nombre <> "" && $username <> "" && $correo <> "" && $password <> "") {
         if ($idUsuario <> "") {
@@ -28,8 +29,8 @@ if (isset($_POST["sub"])) {
                     . " `estado` =  :es, `noExterior` = :nex, "
                     . " `noInterior` =  :nint, `correo` = :correo, "
                     . " `password` =  :pass, `telefono` = :tel, "
-                    . " `username` =  :user"
-                    . " WHERE `idUsuario` = :pid";
+                    . " `username` =  :user, `tipo` =  :tipo "
+                    . " WHERE `idUsuario` = :pid ";
             
             try {
                 $stmt = $DB->prepare($sqlUS);
@@ -43,6 +44,7 @@ if (isset($_POST["sub"])) {
                 $stmt->bindValue(":pass", $password);
                 $stmt->bindValue(":tel", $telefono);
                 $stmt->bindValue(":user", $username);
+                $stmt->bindValue(":tipo", $tipo);
                 $stmt->bindValue(":pid", $idUsuario);
                
                 $stmt->execute();
@@ -58,8 +60,8 @@ if (isset($_POST["sub"])) {
             }
             
         } else {
-            $sqlUS = "INSERT INTO " . TABLE_USUARIO . " (`nombre`,`calle`, `colonia`, `estado`, `noExterior`, `noInterior`, `correo`, `password`, `telefono`, `username`) VALUES 
-                (:pt, :ca, :col, :es, :nex, :nint, :correo, :pdsc, :mkey, :mdesc)";
+            $sqlUS = "INSERT INTO " . TABLE_USUARIO . " (`nombre`,`calle`, `colonia`, `estado`, `noExterior`, `noInterior`, `correo`, `password`, `telefono`, `username`,`tipo`) VALUES 
+                (:pt, :ca, :col, :es, :nex, :nint, :correo, :pdsc, :mkey, :mdesc, :tipo)";
             
                 try {
                     $stmt = $DB->prepare($sqlUS);
@@ -73,7 +75,7 @@ if (isset($_POST["sub"])) {
                     $stmt->bindValue(":pdsc", $password);
                     $stmt->bindValue(":mkey", $telefono);
                     $stmt->bindValue(":mdesc", $username);
-    
+                    $stmt->bindValue(":tipo", $tipo);
                    
                     $stmt->execute();
                     if ($stmt->rowCount() > 0) {
@@ -107,7 +109,6 @@ if (isset($_GET["edit"]) && $_GET["edit"] != "") {
 } else {
     $pageTitle = "Registrar nuevo usuario";
 }
-
 
 include("header.php");
 
@@ -183,9 +184,21 @@ try {
                 <td><input type="text" name="password" id="password" class="textboxes" value="<?php echo stripslashes($details[0]["password"]); ?>" autocomplete="off"  onkeyup="changeAlias();"  /> </td>
             </tr>
             <tr>
+                <td class="formLeft"><span class="required">*</span>Seleccione la función que desea desempeñar: </td>
+                <td>     
+                    <?php if (isset($_REQUEST["edit"]) && $_REQUEST["edit"] != "") { ?>
+                        <label><input type="radio" name="tipo" value="B" <?php echo ($details[0]["tipo"] == 'B') ? 'checked' : ''; ?>  />Adoptante</label> &nbsp; 
+                        <label><input type="radio" name="tipo" value="C" <?php echo ($details[0]["tipo"] == 'C') ? 'checked' : ''; ?>  />Organización u colaborador</label>
+                    <?php } else { ?>
+                        <label><input type="radio" name="tipo" value="B" checked  />Adoptante</label> &nbsp; <label><input type="radio" name="tipo" value="C"  />Organización u colaborador</label>
+                    <?php } ?>
+
+                </td>
+            </tr>   
+            <tr>
                 <td></td>
                 <td> <input type="submit" name="sub" value="Guardar cambios" /> &nbsp;  <input type="button" name="" onclick="javascript:window.location = 'manage_users.php';" value="Volver a la lista de usuarios" /> </td>
-            </tr>       
+            </tr>    
         </table>
     </form>
 </div>

@@ -87,7 +87,7 @@ if (isset($_POST["sub"])) {
           
         }
     } else {
-        $msg = errorMessage("All fields are mandatory");
+        $msg = errorMessage("Todos los campos son obligatorios");
     }
 }
 
@@ -95,7 +95,7 @@ if (isset($_GET["edit"]) && $_GET["edit"] != "") {
     $pageTitle = "Edit Page";
 
     try {
-        $stmt = $DB->prepare("SELECT * FROM " . TABLE_PAGES . " WHERE `page_id` = :pid");
+        $stmt = $DB->prepare("SELECT * FROM " . TABLE_PAGES . " WHERE `page_id` = :pid ");
         $stmt->bindValue(":pid", intval(db_prepare_input($_GET["edit"])));
         $stmt->execute();
         $details = $stmt->fetchAll();
