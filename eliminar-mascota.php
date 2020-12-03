@@ -48,7 +48,7 @@ $pageDetails = getPageDetailsByName($currentPage);
         <link rel="stylesheet" href="css/styles.css?v=<?php echo(rand()); ?>">
     </head>
     
-    <body>
+    <body class="cuerpo"> 
         <h1 class="text-logo"> Eliminar una mascota </h1>
          <div class="container admin">
             <div class="row">
@@ -62,14 +62,14 @@ $pageDetails = getPageDetailsByName($currentPage);
                         <p class="caption">¿Estás seguro que deseas eliminar esta mascota del catálogo?</p>
                         <br>
                         <div class="col-sm-6">
-                            <a><button type="submit" class="btn btn-warning">Aceptar</button></a>
+                            <a><button type="submit" class="btn btn-warning"><span class="glyphicon glyphicon-trash"></span>    Aceptar</button></a>
                         </div> 
                         <div class="col-sm-6">
                             <?php
                                 if($idTipoUser == '1'){
-                                    echo '<a class="btn btn-default" href="admin-catalogo.php">Cancelar</a>';
+                                    echo '<a class="btn btn-default" href="admin-catalogo.php"><span class="glyphicon glyphicon-arrow-left"></span> Cancelar</a>';
                                 }elseif($idTipoUser == '2'){
-                                    echo '<a class="btn btn-default" href="cuidador-catalogo.php">Cancelar</a>';
+                                    echo '<a class="btn btn-default" href="cuidador-catalogo.php"><span class="glyphicon glyphicon-arrow-left"></span> Cancelar</a>';
                                 }
                             ?>
                         </div>

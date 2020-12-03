@@ -17,12 +17,12 @@ $idTipoUser = '1'; /*id del tipo de usuario 1:admin, 2:cuidador, 3:adoptante, 4:
         <link rel="stylesheet" href="css/styles.css?v=<?php echo(rand()); ?>">
     </head>
     
-    <body>
+    <body class="cuerpo">
         <h1 class="text-logo"> Administración del catálogo </h1>
         <div class="container admin">
             <div class="row">
                 <div class="detalles">
-                    <label>Lista de mascotas </label>  <a href="agregar-mascota.php" class="btn btn-success btn-lg"><span class="glyphicon glyphicon-plus"></span>Agregar una mascota</a></h1>
+                    <label>Lista de mascotas en el catálogo </label>  <a href="agregar-mascota.php" class="btn btn-success btn-lg"><span class="glyphicon glyphicon-plus"></span>Agregar una mascota</a></h1>
                 </div>
                 <table class="table table-striped table-bordered">
                   <thead>

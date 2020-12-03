@@ -2,7 +2,7 @@
 
 require("libs/config.php");
 $pageDetails = getPageDetailsByName($currentPage);
-$idTipoUser = '4'; /*id del tipo de usuario 1:admin, 2:cuidador, 3:adoptante, 4:visitante*/
+$idTipoUser = '2'; /*id del tipo de usuario 1:admin, 2:cuidador, 3:adoptante, 4:visitante*/
 
 include("header.php");
 ?>

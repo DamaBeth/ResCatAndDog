@@ -112,7 +112,7 @@ $nombreError = $descripcionError = $edadError = $categoriaError = $tipoError = $
         <link rel="stylesheet" href="css/styles.css?v=<?php echo(rand()); ?>">
     </head>
     
-    <body>
+    <body class="cuerpo">
         <h1 class="text-logo"> Agregar una nueva mascota </h1>
          <div class="container admin">
             <div class="row">
