@@ -6,17 +6,24 @@ $pageDetails = getPageDetailsByName($currentPage);
     {
         $id = checkInput($_GET['id']);
     }
+    if(!empty($_GET['idTipoUser'])) 
+    {
+        $idTipoUser = checkInput($_GET['idTipoUser']);
+    }
     $statement = $DB->prepare("SELECT idMascota, nombre, comentarios, foto, tipo FROM mascota WHERE mascota.idMascota = ?");
     $statement->execute(array($id));
     $mascota = $statement->fetch();
 
-    if(!empty($_POST)) 
-    {
-        $id = checkInput($_POST['id']);
-        $statement = $DB->prepare("UPDATE mascota SET estado = 'inactivo' WHERE idMascota = ?");
-        $statement->execute(array($id));
-        header("Location: admin-catalogo.php"); 
-    }
+    /*if($idTipoUser == '1'){*/
+        if(!empty($_POST)) 
+        {
+            $id = checkInput($_POST['id']);
+            $statement = $DB->prepare("UPDATE mascota SET estado = 'inactivo' WHERE idMascota = ?");
+            $statement->execute(array($id));
+            header("Location: cuidador-catalogo.php"); 
+        }
+    /*}*/
+    
     
 
     function checkInput($data) 
@@ -52,10 +59,19 @@ $pageDetails = getPageDetailsByName($currentPage);
                     <br>
                     <form class="form" action="eliminar-mascota.php" role="form" method="post">
                         <input type="hidden" name="id" value="<?php echo $id;?>"/>
-                        <p class="alert alert-warning">¿Estás seguro que deseas eliminar esta mascota del catálogo?</p>
-                        <div class="form-actions">
-                        <button type="submit" class="btn btn-warning">Aceptar</button>
-                        <a class="btn btn-default" href="admin-catalogo.php">Cancelar</a>
+                        <p class="caption">¿Estás seguro que deseas eliminar esta mascota del catálogo?</p>
+                        <br>
+                        <div class="col-sm-6">
+                            <a><button type="submit" class="btn btn-warning">Aceptar</button></a>
+                        </div> 
+                        <div class="col-sm-6">
+                            <?php
+                                if($idTipoUser == '1'){
+                                    echo '<a class="btn btn-default" href="admin-catalogo.php">Cancelar</a>';
+                                }elseif($idTipoUser == '2'){
+                                    echo '<a class="btn btn-default" href="cuidador-catalogo.php">Cancelar</a>';
+                                }
+                            ?>
                         </div>
                     </form>
                 </div>

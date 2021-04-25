@@ -2,6 +2,7 @@
 
 require("libs/config.php");
 $pageDetails = getPageDetailsByName($currentPage);
+$idTipoUser = '1'; /*id del tipo de usuario 1:admin, 2:cuidador, 3:adoptante, 4:visitante*/
 
 include("header.php");
 ?>
@@ -62,12 +63,22 @@ include("header.php");
                                                     <div class="caption">
                                                         <h4>' . $mascota['tipo'] . '</h4>
                                                         <p>' . $mascota['comentarios'] . '</p>
-                                                        <div class="left-contentCatag">
-                                                            <a href="#" class="btn btn-adoptar" role="button"> Adoptar</a>
-                                                        </div>
-                                                        <div class="left-contentCatag">
-                                                            <a href="ver-mascota.php?id='.$mascota['idMascota'].'" class="btn btn-info" role="button"> Ver</a>
-                                                        </div>   
+                                                        <div class="left-contentCatag">';
+                                                        if($idTipoUser == '3'){
+                                                            echo '<a href="#" class="btn btn-adoptar" role="button"> Adoptar</a>';
+                                                        }elseif($idTipoUser != '1' && $idTipoUser != '2'){
+                                                            echo '<a href="login.php" class="btn btn-adoptar" role="button"> Adoptar</a>';
+                                                        }
+                                                        echo    
+                                                        '</div>';
+                                                        if($idTipoUser == '1' || $idTipoUser == '2'){
+                                                            echo '<a href="ver-mascota.php?id='.$mascota['idMascota'].'&idTipoUser='.$idTipoUser.'" class="btn btn-info" role="button"> Ver</a>';
+                                                        }else{
+                                                            echo '<div class="left-contentCatag">
+                                                                    <a href="ver-mascota.php?id='.$mascota['idMascota'].'&idTipoUser='.$idTipoUser.'" class="btn btn-info" role="button"> Ver</a>
+                                                                  </div> ';
+                                                        }
+                                                        echo '
                                                     </div>
                                                 </div>
                                             </div>';
@@ -85,12 +96,22 @@ include("header.php");
                                                 <div class="caption">
                                                     <h4>' . $mascota['tipo'] . '</h4>
                                                     <p>' . $mascota['comentarios'] . '</p>
-                                                    <div class="left-contentCatag">
-                                                            <a href="#" class="btn btn-adoptar" role="button"> Adoptar</a>
-                                                        </div>
-                                                        <div class="left-contentCatag">
-                                                            <a href="ver-mascota.php?id='.$mascota['idMascota'].'" class="btn btn-info" role="button"> Ver</a>
-                                                    </div> 
+                                                    <div class="left-contentCatag">';
+                                                    if($idTipoUser == '3'){
+                                                        echo '<a href="#" class="btn btn-adoptar" role="button"> Adoptar</a>';
+                                                    }elseif($idTipoUser != '1' && $idTipoUser != '2'){
+                                                        echo '<a href="login.php" class="btn btn-adoptar" role="button"> Adoptar</a>';
+                                                    }
+                                                    echo
+                                                    '</div>';
+                                                    if($idTipoUser == '1' || $idTipoUser == '2'){
+                                                        echo '<a href="ver-mascota.php?id='.$mascota['idMascota'].'&idTipoUser='.$idTipoUser.'" class="btn btn-info" role="button"> Ver</a>';
+                                                    }else{
+                                                        echo '<div class="left-contentCatag">
+                                                                <a href="ver-mascota.php?id='.$mascota['idMascota'].'&idTipoUser='.$idTipoUser.'" class="btn btn-info" role="button"> Ver</a>
+                                                              </div> ';
+                                                    }
+                                                    echo '
                                                 </div>
                                             </div>
                                         </div>';

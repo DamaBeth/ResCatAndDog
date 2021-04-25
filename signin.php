@@ -65,7 +65,8 @@ include("header.php");
 .input-textarea-row{ width:280px; height:65px; background-color:#FFF; float:left; position:relative; }
 .textbox{ width:100%; height:24px;  border:2px solid #007294;outline:none; background:transparent; color:#000; padding:0px;  }
 .textarea{ width:100%; height:57px;  border:1px solid #007294; outline:none; background:transparent; color:#000; padding:0px;  }
-.submit_button{background:#118eb1;padding:8px;border:none;cursor:pointer;position:left;}
+.submit_button{background:#118eb1;padding:15px;border:10px;cursor:pointer;}
+.submit_button:hover{background:#007294;padding:15px;border:10px;cursor:pointer;}
 .success{padding-bottom:30px; color:#009900;}
 .error{padding-bottom:30px; color:#F00;}
 </style>
